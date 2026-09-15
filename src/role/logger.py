@@ -54,12 +54,19 @@ class SessionLogger:
         self._turn_index: int = self._resume_index()
 
     def _resume_index(self) -> int:
-        """Return the next turn_index (1-based), continuing after any prior turns."""
+        """Return the next turn_index (1-based), continuing after any prior turns.
+
+        Raises ValueError if the file exists but contains no valid turn records —
+        an empty transcript is a corrupt state, not a fresh session.
+        """
         if not self._path.exists():
             return 1
         lines = [ln.strip() for ln in self._path.read_text().splitlines() if ln.strip()]
         if not lines:
-            return 1
+            raise ValueError(
+                f"Session file {self._path} exists but contains no turn records. "
+                "Delete it to start a new session or fix the corrupt file."
+            )
         return json.loads(lines[-1])["turn_index"] + 1
 
     def log(
