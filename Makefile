@@ -1,4 +1,4 @@
-.PHONY: setup doctor test gate demo clean
+.PHONY: setup doctor test gate demo coach clean
 .DEFAULT_GOAL := help
 
 help:
@@ -7,6 +7,7 @@ help:
 	@echo "make test    unit tests"
 	@echo "make gate    run every phase gate in tests/gates/"
 	@echo "make demo    run the thing end to end"
+	@echo "make coach   serve the concept primer at http://localhost:8000/role-day1.html"
 
 setup:
 	@command -v uv >/dev/null || { echo "uv not installed: curl -LsSf https://astral.sh/uv/install.sh | sh"; exit 1; }
@@ -25,8 +26,11 @@ gate:
 	uv run pytest tests/gates -q
 
 demo:
-	@echo "not implemented yet. make demo must run the system end to end from a clean clone."
-	@exit 1
+	@test -f .env && . ./.env; uv run python -c "from role.session import run; run()"
+
+coach:
+	@echo "Serving coach pages at http://localhost:8000/role-day1.html"
+	python3 -m http.server 8000 --directory docs
 
 clean:
 	rm -rf .venv .pytest_cache **/__pycache__

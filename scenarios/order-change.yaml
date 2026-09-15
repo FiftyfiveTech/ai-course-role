@@ -1,0 +1,8 @@
+id: order-change
+title: "Order-change request"
+difficulty: easy
+goal: "Listen actively, confirm order details, and take clear action to modify the order or explain alternatives"
+persona:
+  name: Alex
+  policy: persona_v1.md
+  opening: "The call just connected. Greet the customer service rep and state your problem."

@@ -1,0 +1,41 @@
+{
+  "seed_id": "soda-0502",
+  "source_dataset": "allenai/soda",
+  "row_index": 502,
+  "licence": "Apache-2.0",
+  "provenance_url": "https://huggingface.co/datasets/allenai/soda",
+  "eval_split": "heldout",
+  "fetch_url": "https://datasets-server.huggingface.co/rows?dataset=allenai%2Fsoda&config=default&split=train&offset=502&length=1",
+  "raw": {
+    "head": "PersonX becomes an artist",
+    "relation": "xReact",
+    "tail": "proud",
+    "literal": "Amaiya becomes an artist. Now Amaiya feels proud.",
+    "narrative": "Amaiya picked up a paintbrush for the first time and felt a sense of pride. She knew she was destined to be an artist. Amaiya had always loved going to art museums and admiring the paintings, but she never thought she could create something so beautiful herself.",
+    "dialogue": [
+      "Wow, I can't believe I'm actually holding a paintbrush for the first time.",
+      "It's not as difficult as it looks. Just relax and let your hand flow with the brush.",
+      "It's so strange how something so simple can create such beautiful paintings.",
+      "Yes, art is definitely a passion of yours. You have a real talent for it.",
+      "Thank you, I've always loved going to art museums and admiring the paintings, but I never thought I could create something so beautiful myself.",
+      "There's no reason why you couldn't create something just as beautiful. Just follow your heart and let the paintbrush do the rest."
+    ],
+    "speakers": [
+      "Amaiya",
+      "Instructor",
+      "Amaiya",
+      "Instructor",
+      "Amaiya",
+      "Instructor"
+    ],
+    "PersonX": "Amaiya",
+    "PersonY": "",
+    "PersonZ": "",
+    "original_index": 6030640,
+    "split": "train",
+    "head_answer": "Yes",
+    "pmi_head_answer": "Yes",
+    "relation_tail_answer": "Yes",
+    "pmi_relation_tail_answer": "Yes"
+  }
+}

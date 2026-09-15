@@ -1,0 +1,16 @@
+{
+  "seed_id": "bitext-10000",
+  "source_dataset": "bitext/Bitext-customer-support-llm-chatbot-training-dataset",
+  "row_index": 10000,
+  "licence": "CC-BY-4.0",
+  "provenance_url": "https://huggingface.co/datasets/bitext/Bitext-customer-support-llm-chatbot-training-dataset",
+  "eval_split": "heldout",
+  "fetch_url": "https://datasets-server.huggingface.co/rows?dataset=bitext%2FBitext-customer-support-llm-chatbot-training-dataset&config=default&split=train&offset=10000&length=1",
+  "raw": {
+    "flags": "BL",
+    "instruction": "open a {{Account Type}} account",
+    "category": "ACCOUNT",
+    "intent": "create_account",
+    "response": "I'm thrilled to assist you in opening a {{Account Type}} account. It's a great choice! To get started, I would need a few details from you. Could you please provide the full name, email address, and a preferred username for the account? Once we have these details, I'll guide you step-by-step through the process, making sure you're well-informed at every stage. You can trust that your privacy and security are of the utmost importance to us, and we'll handle your information with the highest level of care."
+  }
+}

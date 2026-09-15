@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ROLE Day 1 — Concept Primer</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --border: #2a2d3a;
+      --accent: #5b8def;
+      --warn: #e8a838;
+      --ok: #4caf82;
+      --text: #d4d8e8;
+      --muted: #7a7f99;
+      --code-bg: #12141e;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 2rem 1rem 4rem;
+    }
+    .page { max-width: 780px; margin: 0 auto; }
+
+    header { margin-bottom: 3rem; }
+    header .label {
+      font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); font-weight: 600; margin-bottom: 0.5rem;
+    }
+    header h1 { font-size: 2rem; font-weight: 700; line-height: 1.2; }
+    header p { color: var(--muted); margin-top: 0.5rem; font-size: 0.95rem; }
+
+    h2 {
+      font-size: 1.2rem; font-weight: 600; margin: 2.5rem 0 0.75rem;
+      padding-bottom: 0.4rem; border-bottom: 1px solid var(--border);
+    }
+    h3 { font-size: 1rem; font-weight: 600; margin: 1.5rem 0 0.5rem; color: var(--accent); }
+    p { margin-bottom: 0.9rem; }
+    ul, ol { margin: 0.5rem 0 1rem 1.4rem; }
+    li { margin-bottom: 0.35rem; }
+
+    .callout {
+      background: var(--surface); border-left: 3px solid var(--warn);
+      border-radius: 6px; padding: 1rem 1.2rem; margin: 1.5rem 0;
+    }
+    .callout.ok { border-color: var(--ok); }
+    .callout .title {
+      font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+      font-weight: 700; margin-bottom: 0.4rem;
+    }
+    .callout.warn .title { color: var(--warn); }
+    .callout.ok .title { color: var(--ok); }
+
+    table {
+      width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem;
+      font-size: 0.9rem;
+    }
+    th {
+      text-align: left; padding: 0.5rem 0.75rem;
+      background: var(--surface); color: var(--muted);
+      font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 0.55rem 0.75rem; border-bottom: 1px solid var(--border);
+    }
+    tr:last-child td { border-bottom: none; }
+
+    code {
+      font-family: "JetBrains Mono", "Fira Code", monospace;
+      font-size: 0.85em; background: var(--code-bg);
+      padding: 0.1em 0.4em; border-radius: 3px; color: #a8c4ff;
+    }
+    pre {
+      background: var(--code-bg); border: 1px solid var(--border);
+      border-radius: 6px; padding: 1rem 1.2rem; overflow-x: auto;
+      margin: 1rem 0 1.5rem; font-size: 0.85rem;
+    }
+    pre code { background: none; padding: 0; }
+
+    .rule-box {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; padding: 1.2rem 1.5rem; margin: 2rem 0;
+    }
+    .rule-box .rule-title {
+      font-weight: 700; color: var(--accent); margin-bottom: 0.5rem;
+    }
+
+    footer {
+      margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+      font-size: 0.8rem; color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="label">ROLE · Day 1 · Concept Primer</div>
+    <h1>Why the Evaluator Model Must Differ from the Persona Model</h1>
+    <p>Self-preference bias — what it is, why it matters, and the rule that follows.</p>
+  </header>
+
+  <!-- ── 1. The Problem ── -->
+  <h2>1. The Problem: Self-Preference Bias</h2>
+
+  <p>
+    When an LLM is asked to judge two outputs — one it generated itself and one from a
+    different model — it systematically rates its own output higher, even when the other
+    output is objectively better by human standards.
+  </p>
+  <p>
+    This is not a subtle effect. Studies have observed <strong>10–30 percentage-point
+    inflation</strong> in win-rates when a model scores its own text versus human preference
+    judgements on the same pairs.
+  </p>
+
+  <div class="callout warn">
+    <div class="title">⚠ Key Finding</div>
+    If the same model family both plays the persona <em>and</em> grades the trainee's response
+    to that persona, the scores are corrupted — the evaluator rewards replies that match the
+    persona model's style, not replies that are actually good at the coaching skill being trained.
+  </div>
+
+  <h3>Why it happens</h3>
+  <ul>
+    <li>
+      <strong>Training distribution alignment.</strong> A model assigns higher likelihood to
+      text that resembles its own training and generation patterns. Higher likelihood maps to
+      higher perceived quality.
+    </li>
+    <li>
+      <strong>Style familiarity.</strong> Each model family has idiosyncratic phrasing,
+      hedging patterns, and answer structure. A judge model that shares those patterns reads
+      them as fluent and authoritative.
+    </li>
+    <li>
+      <strong>No ground truth anchor.</strong> Without a human reference or explicit rubric
+      grounded outside the model's own style, the model defaults to comparing against its
+      internal reference — itself.
+    </li>
+  </ul>
+
+  <!-- ── 2. Evidence ── -->
+  <h2>2. What the Evidence Shows</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Setting</th>
+        <th>Self-score win-rate</th>
+        <th>Human win-rate</th>
+        <th>Inflation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>GPT-4 judging GPT-4 vs GPT-3.5 outputs</td>
+        <td>~70 %</td>
+        <td>~58 %</td>
+        <td>+12 pp</td>
+      </tr>
+      <tr>
+        <td>Claude judging Claude vs Llama outputs</td>
+        <td>~68 %</td>
+        <td>~54 %</td>
+        <td>+14 pp</td>
+      </tr>
+      <tr>
+        <td>Llama-3 judging Llama-3 vs Mistral outputs</td>
+        <td>~65 %</td>
+        <td>~50 %</td>
+        <td>+15 pp</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size:0.8rem; color:var(--muted);">
+    Illustrative figures drawn from the LLM-as-judge literature (Zheng et al. 2023,
+    Panickssery et al. 2024). Exact numbers vary by task and prompt.
+  </p>
+
+  <p>
+    The pattern holds across model families and scales with how different the model families
+    are: same family → large bias, different families → smaller bias.
+  </p>
+
+  <!-- ── 3. Why it Matters for ROLE ── -->
+  <h2>3. Why It Matters for This Project</h2>
+
+  <p>
+    In the ROLE coaching loop:
+  </p>
+
+  <pre><code>Persona  (plays customer)      →  openai/gpt-oss-120b  via Groq
+Trainee  (human or agent)      →  responds to the persona
+Evaluator (scores the trainee) →  ???</code></pre>
+
+  <p>
+    If the evaluator is <code>openai/gpt-oss-120b</code> — the <em>same model</em> as the
+    persona — it will inflate scores for trainee replies that sound like things
+    <code>openai/gpt-oss-120b</code> would say. A trainee who mimics the persona's style
+    gets a free points boost. A trainee who uses a different but equally effective style
+    gets penalised.
+  </p>
+  <p>
+    The scorecard becomes a measure of <em>style similarity to the persona</em>, not
+    <em>coaching skill</em>.
+  </p>
+
+  <div class="callout warn">
+    <div class="title">⚠ Concrete failure mode</div>
+    Persona says: <em>"I placed an order last Tuesday and it still hasn't shipped."</em><br/>
+    Trainee A (mirrors persona style): <em>"I understand your order from last Tuesday hasn't arrived yet — let me pull that up."</em><br/>
+    Trainee B (different but effective): <em>"Got it — order placed Tuesday, not shipped. Let me check the fulfilment queue."</em><br/><br/>
+    A same-model evaluator scores A higher. A human coach may prefer B for efficiency.
+  </div>
+
+  <!-- ── 4. The Fix ── -->
+  <h2>4. The Fix: Use a Different Model Family</h2>
+
+  <p>
+    The evaluator must come from a <strong>different model family</strong> than the persona.
+    This breaks the self-preference circuit because the evaluator has no in-distribution
+    preference for the persona's stylistic patterns.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Role</th>
+        <th>Model (HF repo id)</th>
+        <th>Provider</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Persona</td>
+        <td><code>openai/gpt-oss-120b</code></td>
+        <td>Groq (free tier)</td>
+      </tr>
+      <tr>
+        <td>Evaluator</td>
+        <td><code>meta-llama/Llama-3.3-70B-Instruct</code></td>
+        <td>Groq (free tier)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>
+    Llama-3.3-70B is from a completely different training lineage than the OpenAI GPT
+    family, so it has no in-distribution preference for GPT-style phrasing. It grades on
+    rubric compliance, not style match.
+  </p>
+
+  <h3>What "different" means in practice</h3>
+  <ul>
+    <li><strong>Different base model family</strong> — not just a fine-tune of the same base.</li>
+    <li><strong>Different training data mix</strong> — ideally different organisations' RLHF pipelines.</li>
+    <li><strong>Never the model playing the persona</strong> — even a larger version of the same model carries bias.</li>
+  </ul>
+
+  <!-- ── 5. The Rule ── -->
+  <div class="rule-box">
+    <div class="rule-title">Project Rule — Evaluator ≠ Persona</div>
+    The evaluator model must come from a different model family than the persona model.<br/>
+    Violation: evaluator is any variant of <code>openai/gpt-oss-*</code> while persona is also
+    <code>openai/gpt-oss-*</code>.<br/><br/>
+    This rule is enforced by test <code>tests/gates/test_no_self_eval.py</code> (written in ROLE-009).
+  </div>
+
+  <!-- ── 6. Further Reading ── -->
+  <h2>5. Further Reading</h2>
+  <ul>
+    <li>Zheng et al. (2023) — <em>Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena</em></li>
+    <li>Panickssery et al. (2024) — <em>LLM Evaluators Recognize and Favor Their Own Generations</em></li>
+    <li>Liu et al. (2023) — <em>G-Eval: NLG Evaluation Using GPT-4 with Better Human Alignment</em></li>
+  </ul>
+
+  <footer>
+    ROLE — Roleplay &amp; Skills Coach · FiftyfiveTech AI Engineering Course ·
+    Primer last updated 2026-09-15
+  </footer>
+
+</div>
+</body>
+</html>

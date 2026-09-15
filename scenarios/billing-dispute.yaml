@@ -1,0 +1,8 @@
+id: billing-dispute
+title: "Billing dispute"
+difficulty: medium
+goal: "De-escalate a frustrated customer, verify the charge, and resolve or escalate appropriately"
+persona:
+  name: Jordan
+  policy: persona_billing_dispute_v1.md
+  opening: "You just connected. Express that you were charged twice for the same subscription last month."

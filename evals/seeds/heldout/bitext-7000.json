@@ -1,0 +1,16 @@
+{
+  "seed_id": "bitext-7000",
+  "source_dataset": "bitext/Bitext-customer-support-llm-chatbot-training-dataset",
+  "row_index": 7000,
+  "licence": "CC-BY-4.0",
+  "provenance_url": "https://huggingface.co/datasets/bitext/Bitext-customer-support-llm-chatbot-training-dataset",
+  "eval_split": "heldout",
+  "fetch_url": "https://datasets-server.huggingface.co/rows?dataset=bitext%2FBitext-customer-support-llm-chatbot-training-dataset&config=default&split=train&offset=7000&length=1",
+  "raw": {
+    "flags": "BCLQ",
+    "instruction": "I'm dissatisfied with ur work help me making a complaint",
+    "category": "FEEDBACK",
+    "intent": "complaint",
+    "response": "I'm truly sorry to hear that you're dissatisfied with our work. Your feedback is essential to us as we continuously strive to improve our services and meet your expectations. We value your concerns and would like to address them promptly and effectively. Could you please provide me with more details about your complaint? This will help us thoroughly investigate the matter and provide you with a satisfactory resolution."
+  }
+}

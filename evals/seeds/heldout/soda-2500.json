@@ -1,0 +1,45 @@
+{
+  "seed_id": "soda-2500",
+  "source_dataset": "allenai/soda",
+  "row_index": 2500,
+  "licence": "Apache-2.0",
+  "provenance_url": "https://huggingface.co/datasets/allenai/soda",
+  "eval_split": "heldout",
+  "fetch_url": "https://datasets-server.huggingface.co/rows?dataset=allenai%2Fsoda&config=default&split=train&offset=2500&length=1",
+  "raw": {
+    "head": "PersonX lets go of PersonY’s finger",
+    "relation": "xReact",
+    "tail": "free",
+    "literal": "Alvaro lets go of Jayci’s finger. Now Alvaro feels free.",
+    "narrative": "Alvaro was holding Jayci's finger tightly, but she let go and felt free. She had been holding on so tight because she was afraid of what would happen if she let go, but now she realized that there was nothing to be afraid of.",
+    "dialogue": [
+      "Hey, Jayci. I need to talk to you about something.",
+      "Yeah, what's up?",
+      "Well, I've been thinking about us and I'm not sure if this is working for me anymore.",
+      "What do you mean? Is there someone else?",
+      "No, it's not that. It's just that I don't know if I'm ready for a relationship right now.",
+      "So you're breaking up with me?",
+      "I think it would be best if we took a break. Just for a little while until I figure things out.",
+      "Fine, whatever. We can take a break. But just so you know, I'm not going to wait around forever for you to make up your mind."
+    ],
+    "speakers": [
+      "Alvaro",
+      "Jayci",
+      "Alvaro",
+      "Jayci",
+      "Alvaro",
+      "Jayci",
+      "Alvaro",
+      "Jayci"
+    ],
+    "PersonX": "Alvaro",
+    "PersonY": "Jayci",
+    "PersonZ": "",
+    "original_index": 6041519,
+    "split": "train",
+    "head_answer": "Yes",
+    "pmi_head_answer": "Yes",
+    "relation_tail_answer": "No",
+    "pmi_relation_tail_answer": "No"
+  }
+}

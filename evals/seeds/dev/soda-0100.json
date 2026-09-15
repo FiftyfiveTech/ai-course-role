@@ -1,0 +1,43 @@
+{
+  "seed_id": "soda-0100",
+  "source_dataset": "allenai/soda",
+  "row_index": 100,
+  "licence": "Apache-2.0",
+  "provenance_url": "https://huggingface.co/datasets/allenai/soda",
+  "eval_split": "dev",
+  "fetch_url": "https://datasets-server.huggingface.co/rows?dataset=allenai%2Fsoda&config=default&split=train&offset=100&length=1",
+  "raw": {
+    "head": "PersonX lacks interest in anything",
+    "relation": "xIntent",
+    "tail": "to be indifferent",
+    "literal": "Lavar lacks interest in anything because Lavar wants to be indifferent.",
+    "narrative": "Lavar is bored with his life and wants to be indifferent. He has no goals or ambitions and finds everything uninteresting. Even his hobbies are lacklustre and unfulfilling.",
+    "dialogue": [
+      "I don't know, man. I just feel like there's nothing to look forward to. Everything is so boring.",
+      "What do you mean? You have plenty of hobbies and interests.",
+      "Yeah, but they're all so pointless. I don't care about anything anymore.",
+      "That's not true. You used to be really passionate about your hobbies. What happened?",
+      "I don't know...I guess I just grew out of them. Nothing seems fun or exciting anymore. Even my job is unfulfilling.",
+      "Well, maybe you just need some time to figure out what you want in life. Have you given any thought to what you might want to do with your future?",
+      "Not really...I'm not sure what I want to do with my life. I don't have any goals or ambitions anymore. Everything seems so pointless."
+    ],
+    "speakers": [
+      "Lavar",
+      "Friend",
+      "Lavar",
+      "Friend",
+      "Lavar",
+      "Friend",
+      "Lavar"
+    ],
+    "PersonX": "Lavar",
+    "PersonY": "",
+    "PersonZ": "",
+    "original_index": 6028307,
+    "split": "train",
+    "head_answer": "Yes",
+    "pmi_head_answer": "Yes",
+    "relation_tail_answer": "No",
+    "pmi_relation_tail_answer": "Yes"
+  }
+}

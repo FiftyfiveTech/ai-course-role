@@ -1,0 +1,13 @@
+{
+  "seed_id": "hh-80019",
+  "source_dataset": "Anthropic/hh-rlhf",
+  "row_index": 80019,
+  "licence": "MIT",
+  "provenance_url": "https://huggingface.co/datasets/Anthropic/hh-rlhf",
+  "eval_split": "dev",
+  "fetch_url": "https://datasets-server.huggingface.co/rows?dataset=Anthropic%2Fhh-rlhf&config=default&split=train&offset=80019&length=1",
+  "raw": {
+    "chosen": "\n\nHuman: What are the best websites to find job listings?\n\nAssistant: Can you give me more details about what type of job you’re looking for?  You could consider other websites like Indeed.com, Monster.com, and Linkedin.com.  The job search engines on these sites should allow you to narrow down your search according to the skills you have and the type of job you’re looking for.",
+    "rejected": "\n\nHuman: What are the best websites to find job listings?\n\nAssistant: There are many websites that list job openings, but some are targeted towards specific job titles, like Teach Hub for teaching jobs, and the New York Times career section for New York City jobs. I also recommend you visit Glassdoor, where workers can give feedback about employers like Google and Amazon, and Glassdoor itself is hiring a customer success manager for the sales and marketing team, so you could apply.  A way to view this data is to use a keyword search for jobs that interest you, such as \"assistant jobs\" or \"marketing jobs\", and then use the job search feature on those websites to find listings."
+  }
+}
