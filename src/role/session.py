@@ -11,17 +11,9 @@ from typing import Optional
 
 from role.logger import SessionLogger, SESSIONS_DIR
 from role.persona import PersonaAgent
+from role.scenario import Scenario, load, SCENARIOS_DIR
 
-REPO_ROOT = Path(__file__).parent.parent.parent
-PROMPTS_DIR = REPO_ROOT / "prompts"
 TOTAL_TURNS = 10  # persona opens + (trainee + persona) × 4 + trainee closes = 10
-
-
-def _load_prompt(name: str) -> str:
-    path = PROMPTS_DIR / name
-    if not path.exists():
-        raise FileNotFoundError(f"Prompt not found: {path}")
-    return path.read_text()
 
 
 def _print_cost_meter(session_id: str, n_turns: int, wall_secs: float) -> None:
@@ -36,31 +28,37 @@ def _print_cost_meter(session_id: str, n_turns: int, wall_secs: float) -> None:
     )
 
 
-def run(n_turns: int = TOTAL_TURNS, session_id: Optional[str] = None) -> None:
+def run(
+    n_turns: int = TOTAL_TURNS,
+    session_id: Optional[str] = None,
+    scenario: Optional[Scenario] = None,
+) -> None:
     """Run an interactive session. n_turns counts each utterance (persona + trainee).
 
     Pass *session_id* to resume an existing session (turn ids continue from
     where the previous run left off).  A new session id is generated otherwise.
+    Pass *scenario* to select a scenario; defaults to order-change.
     """
+    if scenario is None:
+        scenario = load(SCENARIOS_DIR / "order-change.yaml")
+
     wall_start = time.perf_counter()
     logger = SessionLogger(session_id)
-    system_prompt = _load_prompt("persona_v1.md")
+    system_prompt = scenario.policy_path.read_text()
     persona = PersonaAgent(system_prompt)
 
     print()
     print("=" * 62)
     print("  ROLE — Roleplay & Skills Coach")
-    print("  Scenario : Order-change request")
-    print("  Persona  : Alex, a customer — openai/gpt-oss-120b via Groq")
+    print(f"  Scenario : {scenario.title}  [{scenario.difficulty}]")
+    print(f"  Goal     : {scenario.goal}")
+    print(f"  Persona  : {scenario.persona_name} — openai/gpt-oss-120b via Groq")
     print(f"  Session  : {n_turns} turns  |  id: {logger.session_id}")
     print("=" * 62)
     print()
 
     # Persona opens (turn 1)
-    opening = persona.reply(
-        "The call just connected. Greet the customer service rep and state your problem.",
-        logger=logger,
-    )
+    opening = persona.reply(scenario.opening, logger=logger)
     print(f"Alex : {opening}")
     print()
 

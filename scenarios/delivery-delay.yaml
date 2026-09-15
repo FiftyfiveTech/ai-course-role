@@ -1,0 +1,8 @@
+id: delivery-delay
+title: "Delivery delay enquiry"
+difficulty: hard
+goal: "Manage expectations, provide accurate tracking information, and offer concrete next steps without over-promising"
+persona:
+  name: Sam
+  policy: persona_delivery_delay_v1.md
+  opening: "You just connected. Explain that your package was supposed to arrive three days ago and you have an important event tomorrow."
