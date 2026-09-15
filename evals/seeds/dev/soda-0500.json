@@ -1,0 +1,37 @@
+{
+  "seed_id": "soda-0500",
+  "source_dataset": "allenai/soda",
+  "row_index": 500,
+  "licence": "Apache-2.0",
+  "provenance_url": "https://huggingface.co/datasets/allenai/soda",
+  "eval_split": "dev",
+  "fetch_url": "https://datasets-server.huggingface.co/rows?dataset=allenai%2Fsoda&config=default&split=train&offset=500&length=1",
+  "raw": {
+    "head": "PersonX is angry at another",
+    "relation": "xAttr",
+    "tail": "aggressive",
+    "literal": "Sohan is aggressive. Sohan is angry at another.",
+    "narrative": "Sohan was enraged when she saw her little sister playing with her favorite toy without asking. She immediately went over and snatched the toy away while yelling at her sister.",
+    "dialogue": [
+      "How dare you! That's my favorite toy! You can't just take it without asking!",
+      "I'm sorry, I didn't know it was your favorite. I was just playing with it.",
+      "Well, now you know. So give it back!",
+      "Here, you can have it back. I'm sorry for taking it without asking."
+    ],
+    "speakers": [
+      "Sohan",
+      "Sister",
+      "Sohan",
+      "Sister"
+    ],
+    "PersonX": "Sohan",
+    "PersonY": "",
+    "PersonZ": "",
+    "original_index": 6030630,
+    "split": "train",
+    "head_answer": "Yes",
+    "pmi_head_answer": "Yes",
+    "relation_tail_answer": "Yes",
+    "pmi_relation_tail_answer": "Yes"
+  }
+}

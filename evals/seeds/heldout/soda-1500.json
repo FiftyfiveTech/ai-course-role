@@ -1,0 +1,39 @@
+{
+  "seed_id": "soda-1500",
+  "source_dataset": "allenai/soda",
+  "row_index": 1500,
+  "licence": "Apache-2.0",
+  "provenance_url": "https://huggingface.co/datasets/allenai/soda",
+  "eval_split": "heldout",
+  "fetch_url": "https://datasets-server.huggingface.co/rows?dataset=allenai%2Fsoda&config=default&split=train&offset=1500&length=1",
+  "raw": {
+    "head": "PersonX prepares for summer",
+    "relation": "xWant",
+    "tail": "to go to the beach",
+    "literal": "Nader prepares for summer. Now Nader wants to go to the beach.",
+    "narrative": "Nader is getting ready for summer. She plans to go to the beach as soon as possible. She wants to lay in the sun, swim in the ocean, and build sandcastles.",
+    "dialogue": [
+      "I am so excited for summer! I can't wait to go to the beach and lay in the sun.",
+      "Yeah, the beach is great. You can swim in the ocean and build sandcastles.",
+      "I know! I'm really looking forward to it.",
+      "Do you have any plans for summer?",
+      "I'm going to the beach as soon as possible. I want to lay in the sun, swim in the ocean, and build sandcastles."
+    ],
+    "speakers": [
+      "Nader",
+      "Friend",
+      "Nader",
+      "Friend",
+      "Nader"
+    ],
+    "PersonX": "Nader",
+    "PersonY": "",
+    "PersonZ": "",
+    "original_index": 6036029,
+    "split": "train",
+    "head_answer": "Yes",
+    "pmi_head_answer": "Yes",
+    "relation_tail_answer": "Yes",
+    "pmi_relation_tail_answer": "Yes"
+  }
+}

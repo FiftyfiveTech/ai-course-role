@@ -1,0 +1,45 @@
+{
+  "seed_id": "soda-2000",
+  "source_dataset": "allenai/soda",
+  "row_index": 2000,
+  "licence": "Apache-2.0",
+  "provenance_url": "https://huggingface.co/datasets/allenai/soda",
+  "eval_split": "heldout",
+  "fetch_url": "https://datasets-server.huggingface.co/rows?dataset=allenai%2Fsoda&config=default&split=train&offset=2000&length=1",
+  "raw": {
+    "head": "PersonX ends the telephone conversation",
+    "relation": "xReact",
+    "tail": "angry",
+    "literal": "Kanon ends the telephone conversation. Now Kanon feels angry.",
+    "narrative": "Kanon ends the telephone conversation. Now Kanon feels angry and frustrated. She can't believe that her friend would say something like that to her.",
+    "dialogue": [
+      "I can't believe you would say something like that to me. I thought we were friends.",
+      "I'm sorry, Kanon. I didn't mean to hurt your feelings. It's just that I know how much you're struggling right now and I didn't want to see you get hurt again.",
+      "But what if I told you that I wanted to try again? What if I said that I was willing to risk getting my heart broken again?",
+      "Kanon, I would never want to see you get hurt again. You're my friend and I care about you.",
+      "But don't you think that maybe this time could be different? That maybe this time things could work out for me?",
+      "journey,I believe in you and I know that you're a strong person. But sometimes even the strongest people need help getting through tough times. And right now,I just don't think that trying to date again is the best thing for you.",
+      "I appreciate your concern, but I think I need to do this for myself.",
+      "Okay, Kanon. I support you no matter what you decide."
+    ],
+    "speakers": [
+      "Kanon",
+      "Friend",
+      "Kanon",
+      "Friend",
+      "Kanon",
+      "Friend",
+      "Kanon",
+      "Friend"
+    ],
+    "PersonX": "Kanon",
+    "PersonY": "",
+    "PersonZ": "",
+    "original_index": 6038752,
+    "split": "train",
+    "head_answer": "Yes",
+    "pmi_head_answer": "Yes",
+    "relation_tail_answer": "No",
+    "pmi_relation_tail_answer": "No"
+  }
+}

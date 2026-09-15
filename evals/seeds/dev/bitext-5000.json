@@ -1,0 +1,16 @@
+{
+  "seed_id": "bitext-5000",
+  "source_dataset": "bitext/Bitext-customer-support-llm-chatbot-training-dataset",
+  "row_index": 5000,
+  "licence": "CC-BY-4.0",
+  "provenance_url": "https://huggingface.co/datasets/bitext/Bitext-customer-support-llm-chatbot-training-dataset",
+  "eval_split": "dev",
+  "fetch_url": "https://datasets-server.huggingface.co/rows?dataset=bitext%2FBitext-customer-support-llm-chatbot-training-dataset&config=default&split=train&offset=5000&length=1",
+  "raw": {
+    "flags": "BLZ",
+    "instruction": "see what payment optionsx are allowed",
+    "category": "PAYMENT",
+    "intent": "check_payment_methods",
+    "response": "I appreciate your inquiry! I'm here to assist you in discovering the payment options we accept at our company. By offering a variety of convenient choices, we aim to accommodate your preferences. Here are the payment methods we currently allow:\n\n- **Credit/Debit Card:** Visa, Mastercard, and American Express are all accepted.\n- **PayPal:** A widely recognized and secure online payment platform.\n- **Bank Transfer:** This option allows for direct payments from your bank account.\n- **Apple Pay:** For Apple users, this method provides a seamless payment experience.\n- **Google Wallet:** Another popular payment system for quick and easy checkouts.\n\nPlease let me know if you require more information or assistance with any of these methods. It's our pleasure to be of service to you."
+  }
+}

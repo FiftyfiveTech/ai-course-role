@@ -1,0 +1,16 @@
+{
+  "seed_id": "bitext-12000",
+  "source_dataset": "bitext/Bitext-customer-support-llm-chatbot-training-dataset",
+  "row_index": 12000,
+  "licence": "CC-BY-4.0",
+  "provenance_url": "https://huggingface.co/datasets/bitext/Bitext-customer-support-llm-chatbot-training-dataset",
+  "eval_split": "heldout",
+  "fetch_url": "https://datasets-server.huggingface.co/rows?dataset=bitext%2FBitext-customer-support-llm-chatbot-training-dataset&config=default&split=train&offset=12000&length=1",
+  "raw": {
+    "flags": "BIQSZ",
+    "instruction": "do ya deoiver to {{Delivery City}}",
+    "category": "DELIVERY",
+    "intent": "delivery_options",
+    "response": "I'll do my best! We do offer delivery to {{Delivery City}}. In fact, we have a wide range of shipping options available for you to choose from. Whether you prefer standard shipping, expedited shipping, or even in-store pickup, we have you covered. Each option is designed to meet your specific needs and ensure a smooth and reliable delivery experience. So rest assured, we'll be able to deliver your items to {{Delivery City}} without any issues. If you have any more questions or need further assistance, feel free to ask. Happy shipping to {{Delivery City}}!"
+  }
+}

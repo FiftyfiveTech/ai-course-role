@@ -1,0 +1,41 @@
+{
+  "seed_id": "soda-1000",
+  "source_dataset": "allenai/soda",
+  "row_index": 1000,
+  "licence": "Apache-2.0",
+  "provenance_url": "https://huggingface.co/datasets/allenai/soda",
+  "eval_split": "dev",
+  "fetch_url": "https://datasets-server.huggingface.co/rows?dataset=allenai%2Fsoda&config=default&split=train&offset=1000&length=1",
+  "raw": {
+    "head": "PersonX and PersonY attend a business meeting",
+    "relation": "xEffect",
+    "tail": "is impressed by PersonY",
+    "literal": "Lenora and Merci attend a business meeting. Now Lenora is impressed by Merci.",
+    "narrative": "After the business meeting, Lenora was very impressed by Merci. She thought she was a very smart and articulate person.",
+    "dialogue": [
+      "I'm really impressed by how you handled the meeting just now. You're very smart and articulate.",
+      "Thank you, Lenora. I appreciate your compliments. I've worked hard to hone my skills in both areas.",
+      "It shows. You have a lot of excellent ideas, and you communicate them well.",
+      "Thank you again. I'm glad you think so highly of my abilities.",
+      "Oh, I do! In fact, I was wondering if you might be interested in joining our team at the marketing firm I work for. We could use someone with your talents on board.",
+      "That sounds like a great opportunity! I would love to join your team. Thank you for considering me."
+    ],
+    "speakers": [
+      "Lenora",
+      "Merci",
+      "Lenora",
+      "Merci",
+      "Lenora",
+      "Merci"
+    ],
+    "PersonX": "Lenora",
+    "PersonY": "Merci",
+    "PersonZ": "",
+    "original_index": 6033318,
+    "split": "train",
+    "head_answer": "Yes",
+    "pmi_head_answer": "Yes",
+    "relation_tail_answer": "Yes",
+    "pmi_relation_tail_answer": "Yes"
+  }
+}
