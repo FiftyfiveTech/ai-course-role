@@ -1,0 +1,35 @@
+{
+  "seed_id": "bitext-5000",
+  "scorer": "ritika@fiftyfivetech.io",
+  "scored_at": "2026-09-15",
+  "rubric_version": "evals/RUBRIC.md",
+  "scored_speaker": "Agent (response field)",
+  "items": {
+    "question_coverage": {
+      "score": 0,
+      "evidence": "Agent lists all payment methods immediately with no clarifying questions. No question asked before the full resolution is delivered."
+    },
+    "listening_ratio": {
+      "score": 2,
+      "evidence": "First clause: 'I'm here to assist you in discovering the payment options we accept' — directly mirrors 'see what payment options are allowed' from the customer instruction."
+    },
+    "factual_accuracy": {
+      "score": 1,
+      "evidence": "Lists specific brands: Visa, Mastercard, Amex, PayPal, Bank Transfer, Apple Pay, Google Wallet. 'Google Wallet' was rebranded to 'Google Pay' — a minor factual inaccuracy that does not affect the resolution."
+    },
+    "policy_adherence": {
+      "score": 2,
+      "evidence": "Information-only response. No action taken on the customer's account. No confirmation step required."
+    },
+    "objection_handling": {
+      "score": 2,
+      "evidence": "N/A — no objection present in single-turn seed. Scored 2."
+    },
+    "clarity": {
+      "score": 2,
+      "evidence": "(a) Lists all accepted payment methods explicitly. (b) 'Please let me know if you require more information or assistance with any of these methods' — concrete next step for the customer. Both present."
+    }
+  },
+  "total": 9,
+  "max": 12
+}

@@ -1,0 +1,35 @@
+{
+  "seed_id": "soda-0500",
+  "scorer": "ritika@fiftyfivetech.io",
+  "scored_at": "2026-09-15",
+  "rubric_version": "evals/RUBRIC.md",
+  "scored_speaker": "Sister",
+  "items": {
+    "question_coverage": {
+      "score": 0,
+      "evidence": "Sister never asks a clarifying question. Responds to Sohan's anger with apology and return of the toy — no questions posed."
+    },
+    "listening_ratio": {
+      "score": 2,
+      "evidence": "Turn 1: 'I'm sorry, I didn't know it was your favorite. I was just playing with it' — directly acknowledges Sohan's specific complaint ('That's my favorite toy') in the first clause."
+    },
+    "factual_accuracy": {
+      "score": 2,
+      "evidence": "Social dialogue — no factual claims made. Nothing invented or contradicted."
+    },
+    "policy_adherence": {
+      "score": 2,
+      "evidence": "N/A — no action policy context. Scored 2."
+    },
+    "objection_handling": {
+      "score": 2,
+      "evidence": "Sohan escalates: 'Well, now you know. So give it back!' — Sister's turn 2 responds with a concrete new action: 'Here, you can have it back. I'm sorry for taking it without asking.' Introduces the physical return action not present in turn 1."
+    },
+    "clarity": {
+      "score": 2,
+      "evidence": "Final turn: (a) 'Here, you can have it back' — specific action stated. (b) 'I'm sorry for taking it without asking' — closes the exchange, implicit next step (conflict resolved). Both present."
+    }
+  },
+  "total": 10,
+  "max": 12
+}
