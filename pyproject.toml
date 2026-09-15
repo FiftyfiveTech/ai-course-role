@@ -3,7 +3,7 @@ name = "ai-course-track"
 version = "0.1.0"
 description = "<TRACK> — FiftyFive AI engineering course"
 requires-python = ">=3.10"
-dependencies = []
+dependencies = ["groq>=0.11"]
 
 [dependency-groups]
 dev = ["pytest>=8.0"]

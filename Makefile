@@ -25,8 +25,7 @@ gate:
 	uv run pytest tests/gates -q
 
 demo:
-	@echo "not implemented yet. make demo must run the system end to end from a clean clone."
-	@exit 1
+	@test -f .env && . ./.env; uv run python -c "from role.session import run; run()"
 
 clean:
 	rm -rf .venv .pytest_cache **/__pycache__
