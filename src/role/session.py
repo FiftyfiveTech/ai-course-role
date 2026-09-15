@@ -4,10 +4,12 @@
 The persona always opens first.
 """
 
+import json
+import time
 from pathlib import Path
 from typing import Optional
 
-from role.logger import SessionLogger
+from role.logger import SessionLogger, SESSIONS_DIR
 from role.persona import PersonaAgent
 
 REPO_ROOT = Path(__file__).parent.parent.parent
@@ -22,12 +24,25 @@ def _load_prompt(name: str) -> str:
     return path.read_text()
 
 
+def _print_cost_meter(session_id: str, n_turns: int, wall_secs: float) -> None:
+    """Print one summary line: cost, turns, model time, wall time."""
+    path = SESSIONS_DIR / f"{session_id}.jsonl"
+    records = [json.loads(ln) for ln in path.read_text().splitlines() if ln.strip()]
+    total_cost = sum(r["cost_usd"] for r in records if r["cost_usd"] is not None)
+    model_secs = sum(r["seconds"] for r in records if r["seconds"] is not None)
+    print(
+        f"cost ${total_cost:.4f} | turns {n_turns} | "
+        f"model {model_secs:.1f}s | wall {wall_secs:.1f}s"
+    )
+
+
 def run(n_turns: int = TOTAL_TURNS, session_id: Optional[str] = None) -> None:
     """Run an interactive session. n_turns counts each utterance (persona + trainee).
 
     Pass *session_id* to resume an existing session (turn ids continue from
     where the previous run left off).  A new session id is generated otherwise.
     """
+    wall_start = time.perf_counter()
     logger = SessionLogger(session_id)
     system_prompt = _load_prompt("persona_v1.md")
     persona = PersonaAgent(system_prompt)
@@ -71,6 +86,9 @@ def run(n_turns: int = TOTAL_TURNS, session_id: Optional[str] = None) -> None:
         reply = persona.reply(line, logger=logger)
         print(f"\nAlex : {reply}\n")
         persona_turns += 1
+
+    wall_secs = time.perf_counter() - wall_start
+    _print_cost_meter(logger.session_id, persona_turns + trainee_turns, wall_secs)
 
     print()
     print("=" * 62)
