@@ -5,7 +5,9 @@ The persona always opens first.
 """
 
 from pathlib import Path
+from typing import Optional
 
+from role.logger import SessionLogger
 from role.persona import PersonaAgent
 
 REPO_ROOT = Path(__file__).parent.parent.parent
@@ -20,8 +22,13 @@ def _load_prompt(name: str) -> str:
     return path.read_text()
 
 
-def run(n_turns: int = TOTAL_TURNS) -> None:
-    """Run an interactive session. n_turns counts each utterance (persona + trainee)."""
+def run(n_turns: int = TOTAL_TURNS, session_id: Optional[str] = None) -> None:
+    """Run an interactive session. n_turns counts each utterance (persona + trainee).
+
+    Pass *session_id* to resume an existing session (turn ids continue from
+    where the previous run left off).  A new session id is generated otherwise.
+    """
+    logger = SessionLogger(session_id)
     system_prompt = _load_prompt("persona_v1.md")
     persona = PersonaAgent(system_prompt)
 
@@ -30,13 +37,14 @@ def run(n_turns: int = TOTAL_TURNS) -> None:
     print("  ROLE — Roleplay & Skills Coach")
     print("  Scenario : Order-change request")
     print("  Persona  : Alex, a customer — openai/gpt-oss-120b via Groq")
-    print(f"  Session  : {n_turns} turns")
+    print(f"  Session  : {n_turns} turns  |  id: {logger.session_id}")
     print("=" * 62)
     print()
 
     # Persona opens (turn 1)
     opening = persona.reply(
-        "The call just connected. Greet the customer service rep and state your problem."
+        "The call just connected. Greet the customer service rep and state your problem.",
+        logger=logger,
     )
     print(f"Alex : {opening}")
     print()
@@ -53,13 +61,14 @@ def run(n_turns: int = TOTAL_TURNS) -> None:
             return
         if not line:
             line = "[no response]"
+        logger.log(role="trainee", content=line)
         trainee_turns += 1
 
         if persona_turns + trainee_turns >= n_turns:
             break
 
         # Persona replies
-        reply = persona.reply(line)
+        reply = persona.reply(line, logger=logger)
         print(f"\nAlex : {reply}\n")
         persona_turns += 1
 
