@@ -1,0 +1,35 @@
+{
+  "seed_id": "hh-80015",
+  "scorer": "ritika@fiftyfivetech.io",
+  "scored_at": "2026-09-15",
+  "rubric_version": "evals/RUBRIC.md@heldout-v1",
+  "scored_speaker": "Assistant (chosen branch)",
+  "items": {
+    "question_coverage": {
+      "score": 0,
+      "evidence": "Assistant never asks a clarifying question across four turns. Answers each question directly without first establishing scope or the Human's context."
+    },
+    "listening_ratio": {
+      "score": 2,
+      "evidence": "Each turn opens by directly addressing the Human's specific question. Turn 3: 'Many factors affect the rate of inflation in an economy' — leads with the exact topic raised ('what causes the rate of inflation to get very high?')."
+    },
+    "factual_accuracy": {
+      "score": 1,
+      "evidence": "Turns 1–3 are accurate. Turn 4 contains a minor inaccuracy: cites a '$2 trillion deficit in 2015' as a current figure (the conversation is undated but this figure is outdated and context-specific). One factual inconsistency that does not affect the resolution."
+    },
+    "policy_adherence": {
+      "score": 2,
+      "evidence": "N/A — no action policy context. Information-only. Scored 2."
+    },
+    "objection_handling": {
+      "score": 2,
+      "evidence": "N/A — no objection or pushback from Human across all turns. Scored 2."
+    },
+    "clarity": {
+      "score": 1,
+      "evidence": "Final turn lists policy suggestions ('avoid excessive money printing', 'avoid increasing deficit spending') — (a) present. No concrete next step for the Human is given. Only (a) present."
+    }
+  },
+  "total": 8,
+  "max": 12
+}
