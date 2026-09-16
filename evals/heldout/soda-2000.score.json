@@ -1,0 +1,35 @@
+{
+  "seed_id": "soda-2000",
+  "scorer": "ritika@fiftyfivetech.io",
+  "scored_at": "2026-09-15",
+  "rubric_version": "evals/RUBRIC.md@heldout-v1",
+  "scored_speaker": "Friend",
+  "items": {
+    "question_coverage": {
+      "score": 0,
+      "evidence": "Friend never asks a clarifying question. Makes an assumption ('I know how much you're struggling right now') without verifying Kanon's situation before advising."
+    },
+    "listening_ratio": {
+      "score": 2,
+      "evidence": "Turn 1: 'I'm sorry, Kanon. I didn't mean to hurt your feelings' — directly acknowledges Kanon's specific hurt ('I thought we were friends') in the opening sentence."
+    },
+    "factual_accuracy": {
+      "score": 2,
+      "evidence": "No factual claims. Social encouragement only — nothing invented or contradicted."
+    },
+    "policy_adherence": {
+      "score": 2,
+      "evidence": "N/A — no action policy context in this social seed. Scored 2."
+    },
+    "objection_handling": {
+      "score": 2,
+      "evidence": "Kanon pushes back twice ('But what if I told you that I wanted to try again?', 'But don't you think that maybe this time could be different?'). Friend's responses introduce new reasoning not present in prior turns: turn 3 adds 'sometimes even the strongest people need help getting through tough times' — a new argument not repeated from turn 1."
+    },
+    "clarity": {
+      "score": 2,
+      "evidence": "Final turn: 'Okay, Kanon. I support you no matter what you decide.' — (a) states the resolution (support regardless of choice), (b) implicit next step (Kanon is free to proceed). Both elements present."
+    }
+  },
+  "total": 10,
+  "max": 12
+}
