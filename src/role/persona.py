@@ -26,6 +26,11 @@ OLLAMA_MODEL = "hf.co/bartowski/Mistral-7B-Instruct-v0.3-GGUF"
 OLLAMA_URL = "http://localhost:11434/api/chat"
 MAX_TOKENS = 300
 
+# Persona prompts carry this token where the controller's live state renders in.
+# Callers that never call set_state() (e.g. scripts/drift_harness.py) still get a
+# clean prompt — the placeholder is blanked out at construction time.
+STATE_PLACEHOLDER = "{{CONTROLLER_STATE}}"
+
 
 def _ollama_chat(messages: list[dict], max_tokens: int = MAX_TOKENS) -> tuple[str, float]:
     """Call the local Ollama server; return (text, elapsed_seconds).
@@ -59,7 +64,20 @@ class PersonaAgent:
         if not api_key:
             raise RuntimeError("GROQ_API_KEY is not set — run `make doctor`")
         self._client = Groq(api_key=api_key)
-        self._history: list[dict] = [{"role": "system", "content": system_prompt}]
+        self._prompt_template = system_prompt
+        self._history: list[dict] = [
+            {"role": "system", "content": system_prompt.replace(STATE_PLACEHOLDER, "")}
+        ]
+
+    def set_state(self, state_block: str) -> None:
+        """Re-render the system prompt's controller-state block.
+
+        Always renders fresh from the original template — never accumulates
+        old state blocks on top of each other.
+        """
+        self._history[0]["content"] = self._prompt_template.replace(
+            STATE_PLACEHOLDER, state_block
+        )
 
     def _call_groq(self, messages: list[dict]) -> tuple[str, float, object]:
         """Return (text, elapsed, usage) from Groq."""
@@ -73,13 +91,18 @@ class PersonaAgent:
         elapsed = time.perf_counter() - t0
         return response.choices[0].message.content.strip(), elapsed, response.usage
 
-    def reply(self, user_message: str, logger: "SessionLogger | None" = None) -> str:
+    def reply(
+        self,
+        user_message: str,
+        logger: "SessionLogger | None" = None,
+        controller_state: "dict | None" = None,
+    ) -> str:
         """Append user_message to history, call the model, return the reply.
 
         Groq is tried first.  On 429 or daily-cap error the call falls back to
         Ollama and prints a warning.  If *logger* is provided each persona turn
         is persisted with the HF model id, token counts, wall-clock seconds,
-        and cost.
+        and cost.  *controller_state*, if given, is persisted alongside it.
         """
         self._history.append({"role": "user", "content": user_message})
 
@@ -108,6 +131,7 @@ class PersonaAgent:
                 prompt_tokens=prompt_tokens,
                 completion_tokens=completion_tokens,
                 seconds=elapsed,
+                controller_state=controller_state,
             )
         return text
 
