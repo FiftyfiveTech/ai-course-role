@@ -9,6 +9,7 @@ import time
 from pathlib import Path
 from typing import Optional
 
+from role.controller import Controller
 from role.logger import SessionLogger, SESSIONS_DIR
 from role.persona import PersonaAgent
 from role.scenario import Scenario, load, SCENARIOS_DIR
@@ -46,6 +47,7 @@ def run(
     logger = SessionLogger(session_id)
     system_prompt = scenario.policy_path.read_text()
     persona = PersonaAgent(system_prompt)
+    controller = Controller(scenario.difficulty)
 
     print()
     print("=" * 62)
@@ -58,7 +60,9 @@ def run(
     print()
 
     # Persona opens (turn 1)
-    opening = persona.reply(scenario.opening, logger=logger)
+    state = controller.initial_state()
+    persona.set_state(state.render())
+    opening = persona.reply(scenario.opening, logger=logger, controller_state=state.to_dict())
     print(f"Alex : {opening}")
     print()
 
@@ -74,14 +78,16 @@ def run(
             return
         if not line:
             line = "[no response]"
-        logger.log(role="trainee", content=line)
+        state = controller.step(line)
+        logger.log(role="trainee", content=line, controller_state=state.to_dict())
         trainee_turns += 1
 
         if persona_turns + trainee_turns >= n_turns:
             break
 
         # Persona replies
-        reply = persona.reply(line, logger=logger)
+        persona.set_state(state.render())
+        reply = persona.reply(line, logger=logger, controller_state=state.to_dict())
         print(f"\nAlex : {reply}\n")
         persona_turns += 1
 

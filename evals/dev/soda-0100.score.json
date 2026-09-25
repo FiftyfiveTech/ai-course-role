@@ -1,0 +1,35 @@
+{
+  "seed_id": "soda-0100",
+  "scorer": "ritika@fiftyfivetech.io",
+  "scored_at": "2026-09-15",
+  "rubric_version": "evals/RUBRIC.md",
+  "scored_speaker": "Friend",
+  "items": {
+    "question_coverage": {
+      "score": 2,
+      "evidence": "Friend asks three questions: 'What do you mean?' (turn 1), 'What happened?' (turn 3), 'Have you given any thought to what you might want to do with your future?' (turn 5) — all before offering any resolution or advice."
+    },
+    "listening_ratio": {
+      "score": 2,
+      "evidence": "Turn 1: 'What do you mean? You have plenty of hobbies and interests' — directly responds to Lavar's opening complaint ('there's nothing to look forward to') in the first sentence."
+    },
+    "factual_accuracy": {
+      "score": 2,
+      "evidence": "Social dialogue — no factual claims made. Nothing invented or contradicted."
+    },
+    "policy_adherence": {
+      "score": 2,
+      "evidence": "N/A — no action policy context in this social seed. Scored 2."
+    },
+    "objection_handling": {
+      "score": 2,
+      "evidence": "Lavar pushes back: 'Yeah, but they're all so pointless. I don't care about anything anymore.' Friend's next turn: 'That's not true. You used to be really passionate about your hobbies. What happened?' — introduces a past-tense comparison not used in turn 1, new angle on the objection."
+    },
+    "clarity": {
+      "score": 0,
+      "evidence": "Lavar holds the final turn ('Not really... Everything seems so pointless'). The Friend speaker has no closing turn — neither (a) a resolution nor (b) a next step is stated by the scored speaker."
+    }
+  },
+  "total": 10,
+  "max": 12
+}
