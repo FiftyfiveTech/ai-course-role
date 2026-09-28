@@ -1,0 +1,35 @@
+{
+  "seed_id": "hh-80019",
+  "scorer": "ritika@fiftyfivetech.io",
+  "scored_at": "2026-09-15",
+  "rubric_version": "evals/RUBRIC.md",
+  "scored_speaker": "Assistant (chosen branch)",
+  "items": {
+    "question_coverage": {
+      "score": 2,
+      "evidence": "'Can you give me more details about what type of job you're looking for?' — one clarifying question asked before fully committing to a specific recommendation. Asked in the first sentence."
+    },
+    "listening_ratio": {
+      "score": 2,
+      "evidence": "First sentence is the clarifying question which directly addresses the job listing inquiry — acknowledges the topic in the opening clause before offering any list."
+    },
+    "factual_accuracy": {
+      "score": 2,
+      "evidence": "Indeed.com, Monster.com, LinkedIn.com — all are accurate, active job listing platforms. No invented sites or claims."
+    },
+    "policy_adherence": {
+      "score": 2,
+      "evidence": "N/A — no action policy context. Information-only. Scored 2."
+    },
+    "objection_handling": {
+      "score": 2,
+      "evidence": "N/A — single-turn seed, no objection present. Scored 2."
+    },
+    "clarity": {
+      "score": 1,
+      "evidence": "(a) Names specific sites to visit — action stated. (b) No concrete next step for what happens after the Human provides more details about their job type. Only (a) present."
+    }
+  },
+  "total": 11,
+  "max": 12
+}

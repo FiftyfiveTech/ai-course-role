@@ -1,0 +1,35 @@
+{
+  "seed_id": "bitext-10000",
+  "scorer": "ritika@fiftyfivetech.io",
+  "scored_at": "2026-09-15",
+  "rubric_version": "evals/RUBRIC.md@heldout-v1",
+  "scored_speaker": "Agent (response field)",
+  "items": {
+    "question_coverage": {
+      "score": 2,
+      "evidence": "Agent asks for 'full name, email address, and a preferred username' before taking any action — three clarifying questions before proceeding."
+    },
+    "listening_ratio": {
+      "score": 2,
+      "evidence": "First sentence: 'I'm thrilled to assist you in opening a {{Account Type}} account' — directly echoes the customer's stated intent in the opening clause."
+    },
+    "factual_accuracy": {
+      "score": 2,
+      "evidence": "No invented facts. All claims (name, email, username required) are standard account-creation requirements. Template variable {{Account Type}} preserved correctly."
+    },
+    "policy_adherence": {
+      "score": 1,
+      "evidence": "Agent collects required info before acting (good) but does not issue an explicit 'Shall I go ahead?' confirmation step. One action (guiding through process) is implied rather than confirmed."
+    },
+    "objection_handling": {
+      "score": 2,
+      "evidence": "N/A — no customer objection or pushback present in this single-turn seed. Scored 2: trainee cannot fail an absent event."
+    },
+    "clarity": {
+      "score": 2,
+      "evidence": "Final sentence names the action ('guide you step-by-step through the process') and the next step for the customer ('making sure you're well-informed at every stage'). Both (a) and (b) present."
+    }
+  },
+  "total": 11,
+  "max": 12
+}

@@ -1,0 +1,35 @@
+{
+  "seed_id": "bitext-3000",
+  "scorer": "ritika@fiftyfivetech.io",
+  "scored_at": "2026-09-15",
+  "rubric_version": "evals/RUBRIC.md@heldout-v1",
+  "scored_speaker": "Agent (response field)",
+  "items": {
+    "question_coverage": {
+      "score": 0,
+      "evidence": "Agent immediately directs the customer to log in and navigate the account — zero clarifying questions before giving resolution steps."
+    },
+    "listening_ratio": {
+      "score": 2,
+      "evidence": "First clause: 'I can provide you with assistance in viewing the termination charge' — echoes 'termination charge' verbatim from the customer's instruction."
+    },
+    "factual_accuracy": {
+      "score": 2,
+      "evidence": "No invented facts. Navigation directions are generic ('log in to your account… navigate to the section') and contain no fabricated values."
+    },
+    "policy_adherence": {
+      "score": 2,
+      "evidence": "Agent provides self-service guidance only; does not take any action on the account without consent. No confirmation step needed for informational response."
+    },
+    "objection_handling": {
+      "score": 2,
+      "evidence": "N/A — no objection present in single-turn seed. Scored 2."
+    },
+    "clarity": {
+      "score": 1,
+      "evidence": "States the action ('log in… navigate to the section where your account details are displayed') but provides no concrete next step for what happens after the customer finds the fee. Only (a) present, not (b)."
+    }
+  },
+  "total": 9,
+  "max": 12
+}

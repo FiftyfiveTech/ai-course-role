@@ -23,7 +23,7 @@ test:
 
 gate:
 	@test -n "$$(ls tests/gates/*.py 2>/dev/null)" || { echo "no gates written yet — see tests/gates/README.md"; exit 1; }
-	uv run pytest tests/gates -q
+	@test -f .env && . ./.env; uv run pytest tests/gates -s -q
 
 demo:
 	@test -f .env && . ./.env; uv run python -c "from role.session import run; run()"

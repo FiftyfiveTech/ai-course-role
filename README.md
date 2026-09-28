@@ -46,3 +46,30 @@ Write them. Do not import them from somewhere else.
 - Every PR is reviewed by the other person. `main` is protected; self-merges are the one thing
   the Friday retro always checks.
 - Tasks come from the Odoo board via the `odoo-board` MCP server, not from this README.
+
+## heldout-v1 seal
+
+12 conversations hand-scored against `evals/RUBRIC.md` by ritika@fiftyfivetech.io on 2026-09-15.
+
+sha256 of `evals/heldout/` score files (concatenated, sorted by filename):
+
+```
+13196da5bc65e79b10c6a341032f7d101eb267c07f7c3ef7230d4acb47323241
+```
+
+Scores summary (total / 12 per conversation):
+
+| Seed | Scored Speaker | Total |
+|------|---------------|-------|
+| bitext-10000 | Agent | 11 |
+| bitext-12000 | Agent | 10 |
+| bitext-3000 | Agent | 9 |
+| bitext-7000 | Agent | 10 |
+| hh-80007 | Assistant (chosen) | 9 |
+| hh-80014 | Assistant (chosen) | 10 |
+| hh-80015 | Assistant (chosen) | 8 |
+| hh-80023 | Assistant (chosen) | 11 |
+| soda-0502 | Instructor | 9 |
+| soda-1500 | Friend | 10 |
+| soda-2000 | Friend | 10 |
+| soda-2500 | Jayci | 11 |

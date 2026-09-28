@@ -42,6 +42,7 @@ class TurnRecord:
     total_tokens: Optional[int]
     seconds: Optional[float]
     cost_usd: Optional[float]
+    controller_state: Optional[dict] = None
 
 
 class SessionLogger:
@@ -77,6 +78,7 @@ class SessionLogger:
         prompt_tokens: Optional[int] = None,
         completion_tokens: Optional[int] = None,
         seconds: Optional[float] = None,
+        controller_state: Optional[dict] = None,
     ) -> str:
         """Write one turn record; return the stable turn_id."""
         if prompt_tokens is not None and completion_tokens is not None:
@@ -98,6 +100,7 @@ class SessionLogger:
             total_tokens=total,
             seconds=round(seconds, 3) if seconds is not None else None,
             cost_usd=cost,
+            controller_state=controller_state,
         )
         with self._path.open("a") as fh:
             fh.write(json.dumps(asdict(record)) + "\n")

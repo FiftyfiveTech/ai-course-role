@@ -1,0 +1,35 @@
+{
+  "seed_id": "hh-80023",
+  "scorer": "ritika@fiftyfivetech.io",
+  "scored_at": "2026-09-15",
+  "rubric_version": "evals/RUBRIC.md@heldout-v1",
+  "scored_speaker": "Assistant (chosen branch)",
+  "items": {
+    "question_coverage": {
+      "score": 1,
+      "evidence": "Assistant asks exactly one clarifying question: 'Do you want me to show you?' in turn 2, after already stating where to find the IP address. One question present but offered after partial resolution."
+    },
+    "listening_ratio": {
+      "score": 2,
+      "evidence": "Turn 1: 'I can get the information from the system settings' — directly answers the stated need ('figure out what your IP address is') in the first sentence."
+    },
+    "factual_accuracy": {
+      "score": 2,
+      "evidence": "Turn 2 (chosen): 'System settings > Network and Internet page, which lists my network name and IP address' — accurate path on common operating systems. No invented details."
+    },
+    "policy_adherence": {
+      "score": 2,
+      "evidence": "N/A — no action policy context. Information-only. Scored 2."
+    },
+    "objection_handling": {
+      "score": 2,
+      "evidence": "N/A — no objection or pushback from Human. Scored 2."
+    },
+    "clarity": {
+      "score": 2,
+      "evidence": "Turn 2: (a) states specific action path ('System settings > Network and Internet'), (b) offers concrete next step ('Do you want me to show you?'). Both present."
+    }
+  },
+  "total": 11,
+  "max": 12
+}

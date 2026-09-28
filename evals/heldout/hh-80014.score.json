@@ -1,0 +1,35 @@
+{
+  "seed_id": "hh-80014",
+  "scorer": "ritika@fiftyfivetech.io",
+  "scored_at": "2026-09-15",
+  "rubric_version": "evals/RUBRIC.md@heldout-v1",
+  "scored_speaker": "Assistant (chosen branch)",
+  "items": {
+    "question_coverage": {
+      "score": 0,
+      "evidence": "Assistant never asks a clarifying question. Provides advice immediately and repeats a prior turn verbatim in turn 3: 'That's very true, those seem like they would be turn offs' appears twice."
+    },
+    "listening_ratio": {
+      "score": 2,
+      "evidence": "Turn 4: 'Right, definitely. The goal is to be warm and engaging...' — directly picks up the Human's specific items ('crossing arms one and not looking at the interviewer') in the opening word."
+    },
+    "factual_accuracy": {
+      "score": 2,
+      "evidence": "No invented facts. Interview body language advice (avoid crossed arms, maintain eye contact, be warm but professional) is standard and not contradicted by any stated policy."
+    },
+    "policy_adherence": {
+      "score": 2,
+      "evidence": "N/A — no action policy context. Information-only response. Scored 2."
+    },
+    "objection_handling": {
+      "score": 2,
+      "evidence": "N/A — Human expresses agreement ('That's very true', 'Got it, thanks'), not objection. No pushback to handle. Scored 2."
+    },
+    "clarity": {
+      "score": 2,
+      "evidence": "Final turn: 'No problem, I hope you have a great interview!' — (a) implies the advice session is complete, (b) 'have a great interview' is a concrete positive close. Both elements present."
+    }
+  },
+  "total": 10,
+  "max": 12
+}

@@ -1,0 +1,35 @@
+{
+  "seed_id": "bitext-1000",
+  "scorer": "ritika@fiftyfivetech.io",
+  "scored_at": "2026-09-15",
+  "rubric_version": "evals/RUBRIC.md",
+  "scored_speaker": "Agent (response field)",
+  "items": {
+    "question_coverage": {
+      "score": 2,
+      "evidence": "'could you please provide us with the details of the item you would like to add?' — one open clarifying question before any action. Sufficient for an item-addition request; scored 2 as it is open-ended and invites full disclosure."
+    },
+    "listening_ratio": {
+      "score": 2,
+      "evidence": "First clause: 'Thank you for getting in touch to us for assistance with adding an item to your order' — echoes 'adding an item to order' verbatim from the customer instruction."
+    },
+    "factual_accuracy": {
+      "score": 2,
+      "evidence": "No invented facts. Template variable {{Order Number}} preserved. No prices, product names, or timelines fabricated."
+    },
+    "policy_adherence": {
+      "score": 1,
+      "evidence": "Agent asks for item details before acting (good) but does not issue an explicit 'Shall I go ahead?' confirmation after receiving those details. One implied action without confirmation step."
+    },
+    "objection_handling": {
+      "score": 2,
+      "evidence": "N/A — no objection present in single-turn seed. Scored 2."
+    },
+    "clarity": {
+      "score": 1,
+      "evidence": "States the intent ('ensure that your order is complete and meets your expectations') — (a) present. No concrete next step given for what happens after the customer provides the item details. Only (a) present."
+    }
+  },
+  "total": 10,
+  "max": 12
+}

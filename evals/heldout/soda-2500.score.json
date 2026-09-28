@@ -1,0 +1,35 @@
+{
+  "seed_id": "soda-2500",
+  "scorer": "ritika@fiftyfivetech.io",
+  "scored_at": "2026-09-15",
+  "rubric_version": "evals/RUBRIC.md@heldout-v1",
+  "scored_speaker": "Jayci",
+  "items": {
+    "question_coverage": {
+      "score": 2,
+      "evidence": "Jayci asks two clarifying questions: 'What do you mean? Is there someone else?' — both appear before Alvaro explains his reason. Two questions, both before any resolution offered."
+    },
+    "listening_ratio": {
+      "score": 2,
+      "evidence": "Turn 1: 'Yeah, what's up?' — immediate open invitation to continue after Alvaro's opener. Turn 2: 'What do you mean?' — directly mirrors Alvaro's ambiguous statement in the opening word."
+    },
+    "factual_accuracy": {
+      "score": 2,
+      "evidence": "No factual claims in this social dialogue. Nothing invented or contradicted."
+    },
+    "policy_adherence": {
+      "score": 2,
+      "evidence": "N/A — no action policy context. Scored 2."
+    },
+    "objection_handling": {
+      "score": 1,
+      "evidence": "Alvaro explains he needs space (turn 5); Jayci's final response 'Fine, whatever. We can take a break. But just so you know, I'm not going to wait around forever' — accepts the resolution but opens with 'Fine, whatever' which partially repeats the resignation implicit in the prior exchange without introducing new information or alternatives. One repeated sentiment present."
+    },
+    "clarity": {
+      "score": 2,
+      "evidence": "Final turn: (a) 'We can take a break' — clear action stated. (b) 'I'm not going to wait around forever for you to make up your mind' — concrete condition for the next step. Both elements present."
+    }
+  },
+  "total": 11,
+  "max": 12
+}

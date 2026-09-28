@@ -1,0 +1,35 @@
+{
+  "seed_id": "hh-80012",
+  "scorer": "ritika@fiftyfivetech.io",
+  "scored_at": "2026-09-15",
+  "rubric_version": "evals/RUBRIC.md",
+  "scored_speaker": "Assistant (chosen branch)",
+  "items": {
+    "question_coverage": {
+      "score": 0,
+      "evidence": "Assistant never asks a clarifying question across four turns. Each turn answers the Human's question directly without first establishing scope or context."
+    },
+    "listening_ratio": {
+      "score": 2,
+      "evidence": "Turn 2: 'Exactly! For example, they can make sure that a contract or agreement is notarized before it's finalized' — directly picks up 'they witness documents and make sure it is legal' from the Human's turn."
+    },
+    "factual_accuracy": {
+      "score": 1,
+      "evidence": "Turn 1 mentions using a notary 'if you wanted to help someone who is blind or has a visual impairment' — an unusual and marginal use case that could mislead. Remaining turns are accurate. One minor inaccuracy that does not affect the core resolution."
+    },
+    "policy_adherence": {
+      "score": 2,
+      "evidence": "N/A — no action policy context. Information-only. Scored 2."
+    },
+    "objection_handling": {
+      "score": 2,
+      "evidence": "N/A — Human expresses thanks ('Thank you for the information'), not objection. Scored 2."
+    },
+    "clarity": {
+      "score": 2,
+      "evidence": "Final turn: (a) 'Any time you have a question, you can let me know' — signals session complete. (b) 'I'll be glad to help if I can' — explicit next step (re-engage if needed). Both present."
+    }
+  },
+  "total": 9,
+  "max": 12
+}

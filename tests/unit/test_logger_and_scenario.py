@@ -96,6 +96,34 @@ def test_malformed_scenario_bad_difficulty_raises(tmp_path):
         load(bad)
 
 
+# ── ROLE-018: controller_state round-trips through the log ───────────────────
+
+def test_controller_state_round_trips_through_log(tmp_path, monkeypatch):
+    """controller_state, when given, is persisted and readable on the turn record."""
+    monkeypatch.setattr("role.logger.SESSIONS_DIR", tmp_path)
+
+    logger = SessionLogger()
+    state = {"difficulty": "easy", "mood": "frustrated", "controller_turn": 3}
+    logger.log(role="trainee", content="hello", controller_state=state)
+
+    lines = (tmp_path / f"{logger.session_id}.jsonl").read_text().strip().splitlines()
+    record = json.loads(lines[0])
+    assert record["controller_state"] == state
+
+
+def test_controller_state_defaults_to_none(tmp_path, monkeypatch):
+    """Turns logged without a controller (e.g. drift_harness.py) stay None, not missing."""
+    monkeypatch.setattr("role.logger.SESSIONS_DIR", tmp_path)
+
+    logger = SessionLogger()
+    logger.log(role="trainee", content="hello")
+
+    lines = (tmp_path / f"{logger.session_id}.jsonl").read_text().strip().splitlines()
+    record = json.loads(lines[0])
+    assert "controller_state" in record
+    assert record["controller_state"] is None
+
+
 def test_malformed_scenario_missing_persona_fields_raises(tmp_path):
     """A scenario YAML with an incomplete persona block raises ValueError."""
     bad = tmp_path / "bad_persona.yaml"

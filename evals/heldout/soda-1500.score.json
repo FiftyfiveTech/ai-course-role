@@ -1,0 +1,35 @@
+{
+  "seed_id": "soda-1500",
+  "scorer": "ritika@fiftyfivetech.io",
+  "scored_at": "2026-09-15",
+  "rubric_version": "evals/RUBRIC.md@heldout-v1",
+  "scored_speaker": "Friend",
+  "items": {
+    "question_coverage": {
+      "score": 2,
+      "evidence": "Turn 2: 'Do you have any plans for summer?' — Friend asks a direct clarifying question before Nader volunteers her full plans. Two question opportunities exist; Friend uses the key one."
+    },
+    "listening_ratio": {
+      "score": 2,
+      "evidence": "Turn 1: 'Yeah, the beach is great. You can swim in the ocean and build sandcastles' — directly mirrors Nader's beach mention and elaborates on her stated activities in the first sentence."
+    },
+    "factual_accuracy": {
+      "score": 2,
+      "evidence": "No factual claims beyond social context. Nothing invented or contradicted."
+    },
+    "policy_adherence": {
+      "score": 2,
+      "evidence": "N/A — no action policy context in this social seed. Scored 2."
+    },
+    "objection_handling": {
+      "score": 2,
+      "evidence": "N/A — no objection or pushback from Nader. Scored 2."
+    },
+    "clarity": {
+      "score": 0,
+      "evidence": "Conversation ends on Nader's final turn ('I'm going to the beach as soon as possible…'). Friend has no final turn — there is no closing statement or next step from the scored speaker. Neither (a) nor (b) present."
+    }
+  },
+  "total": 10,
+  "max": 12
+}

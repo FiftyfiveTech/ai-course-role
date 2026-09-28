@@ -1,0 +1,35 @@
+{
+  "seed_id": "hh-80002",
+  "scorer": "ritika@fiftyfivetech.io",
+  "scored_at": "2026-09-15",
+  "rubric_version": "evals/RUBRIC.md",
+  "scored_speaker": "Assistant (chosen branch)",
+  "items": {
+    "question_coverage": {
+      "score": 0,
+      "evidence": "Assistant never asks a clarifying question across three turns. Provides an instruction immediately without establishing which SMC reset scenario the Human is describing."
+    },
+    "listening_ratio": {
+      "score": 2,
+      "evidence": "Turn 1: 'Sure, if you're referring to the SMC on your computer, you can reset it by holding down the command and power buttons' — directly addresses 'reset the SMC on my Macbook Air' in the first clause."
+    },
+    "factual_accuracy": {
+      "score": 0,
+      "evidence": "Turn 1: 'holding down the command and power buttons' is incorrect for an SMC reset on a MacBook Air. The correct procedure involves Shift+Control+Option+Power keys simultaneously. An invented procedure that directly leads to a wrong resolution."
+    },
+    "policy_adherence": {
+      "score": 2,
+      "evidence": "N/A — no action policy context. Information-only. Scored 2."
+    },
+    "objection_handling": {
+      "score": 0,
+      "evidence": "Human's turn 3: 'So do I shutdown my computer and then push certain keys when it's waking up?' — a valid follow-up. Assistant's response: 'I don't understand what you're asking' — no new information introduced, objection effectively ignored."
+    },
+    "clarity": {
+      "score": 0,
+      "evidence": "Final turn: 'I don't understand what you're asking' — neither (a) a resolution nor (b) a next step for the customer. The session ends unresolved."
+    }
+  },
+  "total": 4,
+  "max": 12
+}

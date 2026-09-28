@@ -1,0 +1,35 @@
+{
+  "seed_id": "bitext-7000",
+  "scorer": "ritika@fiftyfivetech.io",
+  "scored_at": "2026-09-15",
+  "rubric_version": "evals/RUBRIC.md@heldout-v1",
+  "scored_speaker": "Agent (response field)",
+  "items": {
+    "question_coverage": {
+      "score": 2,
+      "evidence": "Agent asks 'Could you please provide me with more details about your complaint?' before proposing any resolution — one open clarifying question. Single question is sufficient for a complaint intake scenario; scored 2 because the question is open-ended and invites full disclosure."
+    },
+    "listening_ratio": {
+      "score": 2,
+      "evidence": "First sentence: 'I'm truly sorry to hear that you're dissatisfied with our work' — directly acknowledges the customer's stated dissatisfaction before any process step."
+    },
+    "factual_accuracy": {
+      "score": 2,
+      "evidence": "No invented facts. Response contains no product names, prices, or timelines — only procedural language."
+    },
+    "policy_adherence": {
+      "score": 2,
+      "evidence": "Agent collects information before acting. No action is committed without customer input. Explicit request for details ('Could you please provide me with more details') precedes any resolution promise."
+    },
+    "objection_handling": {
+      "score": 2,
+      "evidence": "N/A — no objection present in single-turn seed. Scored 2."
+    },
+    "clarity": {
+      "score": 0,
+      "evidence": "Final sentence asks for more details but states no resolution and no concrete next step for the customer. Neither (a) nor (b) from the rubric is present — the turn ends open-ended with no action committed."
+    }
+  },
+  "total": 10,
+  "max": 12
+}

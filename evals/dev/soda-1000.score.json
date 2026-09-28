@@ -1,0 +1,35 @@
+{
+  "seed_id": "soda-1000",
+  "scorer": "ritika@fiftyfivetech.io",
+  "scored_at": "2026-09-15",
+  "rubric_version": "evals/RUBRIC.md",
+  "scored_speaker": "Merci",
+  "items": {
+    "question_coverage": {
+      "score": 0,
+      "evidence": "Merci never asks a clarifying question across three turns. Responds to Lenora's statements with thanks and acceptance."
+    },
+    "listening_ratio": {
+      "score": 2,
+      "evidence": "Turn 1: 'Thank you, Lenora. I appreciate your compliments. I've worked hard to hone my skills in both areas' — directly acknowledges Lenora's specific praise ('smart and articulate') by referencing both skills."
+    },
+    "factual_accuracy": {
+      "score": 2,
+      "evidence": "Social dialogue — no factual claims made. Nothing invented or contradicted."
+    },
+    "policy_adherence": {
+      "score": 2,
+      "evidence": "N/A — no action policy context. Scored 2."
+    },
+    "objection_handling": {
+      "score": 2,
+      "evidence": "N/A — no objection or pushback from Lenora. Scored 2."
+    },
+    "clarity": {
+      "score": 2,
+      "evidence": "Final turn: (a) 'I would love to join your team' — clear decision stated. (b) 'Thank you for considering me' — closes the exchange, signals Merci's next step (accepting the offer). Both present."
+    }
+  },
+  "total": 10,
+  "max": 12
+}
