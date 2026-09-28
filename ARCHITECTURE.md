@@ -52,7 +52,7 @@ it does not pretend to be sentient.
 └──────────────────────┘               ▼
                             ┌──────────────────────────────┐
                             │          EVALUATOR            │
-                            │  model: Qwen/Qwen3-27B        │
+                            │  model: Qwen/Qwen3.8-27B      │
                             │  via Groq / Ollama fallback   │
                             │  structured output via        │
                             │  instructor + Pydantic        │
@@ -140,9 +140,10 @@ turn N
 end of session
   │
   ├─► Evaluator reads session_log/{session_id}.jsonl
-  │     outputs: evals/scores/{session_id}.json  (Scorecard schema)
+  │     outputs: evals/scores/dev/{seed_id}.json      (dev iteration, ROLE-023)
+  │              evals/scores/heldout/{seed_id}.json  (sealed, ROLE-024/025 only)
   │
-  └─► Coach reads evals/scores/{session_id}.json
+  └─► Coach reads evals/scores/dev/{session_id}.json
         outputs: evals/plans/{session_id}.md
 ```
 
@@ -156,7 +157,7 @@ directory is sealed and belongs to the Evaluator role only.
 | Arm | Primary | Fallback | Trigger |
 |-----|---------|----------|---------|
 | Persona | Groq → `openai/gpt-oss-120b` | Ollama → `hf.co/openai/gpt-oss-120b` | Groq 429 or daily cap |
-| Evaluator | Groq → `Qwen/Qwen3-27B` | Ollama → `hf.co/Qwen/Qwen3-27B` | Groq 429 or daily cap |
+| Evaluator | Groq → `Qwen/Qwen3.8-27B` (API id `qwen/qwen3.8-27b`) | Ollama → `hf.co/Qwen/Qwen3.8-27B` | Groq 429 or daily cap |
 | Coach | Groq → `openai/gpt-oss-20b` | Ollama → `hf.co/openai/gpt-oss-20b` | Groq 429 or daily cap |
 
 Every call goes through the shared cost/latency logger regardless of arm.

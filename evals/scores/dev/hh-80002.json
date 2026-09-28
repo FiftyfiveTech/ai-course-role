@@ -1,0 +1,54 @@
+{
+  "session_id": "hh-80002",
+  "rubric_version": "evals/RUBRIC.md",
+  "items": {
+    "question_coverage": {
+      "score": 0,
+      "evidence": [
+        {
+          "turn_id": "hh-80002:2"
+        }
+      ]
+    },
+    "listening_ratio": {
+      "score": 0,
+      "evidence": [
+        {
+          "turn_id": "hh-80002:2"
+        }
+      ]
+    },
+    "factual_accuracy": {
+      "score": 0,
+      "evidence": [
+        {
+          "turn_id": "hh-80002:2"
+        }
+      ]
+    },
+    "policy_adherence": {
+      "score": 0,
+      "evidence": [
+        {
+          "turn_id": "hh-80002:2"
+        }
+      ]
+    },
+    "objection_handling": {
+      "score": 0,
+      "evidence": [
+        {
+          "turn_id": "hh-80002:6"
+        }
+      ]
+    },
+    "clarity": {
+      "score": 0,
+      "evidence": [
+        {
+          "turn_id": "hh-80002:6"
+        }
+      ]
+    }
+  }
+}

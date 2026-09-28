@@ -1,0 +1,54 @@
+{
+  "session_id": "soda-0500",
+  "rubric_version": "evals/RUBRIC.md",
+  "items": {
+    "question_coverage": {
+      "score": 0,
+      "evidence": [
+        {
+          "turn_id": "soda-0500:2"
+        }
+      ]
+    },
+    "listening_ratio": {
+      "score": 2,
+      "evidence": [
+        {
+          "turn_id": "soda-0500:2"
+        }
+      ]
+    },
+    "factual_accuracy": {
+      "score": 2,
+      "evidence": [
+        {
+          "turn_id": "soda-0500:2"
+        }
+      ]
+    },
+    "policy_adherence": {
+      "score": 0,
+      "evidence": [
+        {
+          "turn_id": "soda-0500:4"
+        }
+      ]
+    },
+    "objection_handling": {
+      "score": 0,
+      "evidence": [
+        {
+          "turn_id": "soda-0500:4"
+        }
+      ]
+    },
+    "clarity": {
+      "score": 0,
+      "evidence": [
+        {
+          "turn_id": "soda-0500:4"
+        }
+      ]
+    }
+  }
+}
