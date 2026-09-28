@@ -22,6 +22,7 @@ _RATES: dict[str, tuple[float, float]] = {
     "openai/gpt-oss-120b": (0.0, 0.0),  # (prompt, completion)
     "Qwen/Qwen3.8-27B": (0.0, 0.0),
     "openai/gpt-oss-safeguard-20b": (0.0, 0.0),
+    "openai/gpt-oss-20b": (0.0, 0.0),
 }
 _DEFAULT_RATE = (0.0, 0.0)
 
