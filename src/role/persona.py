@@ -31,6 +31,11 @@ MAX_TOKENS = 300
 # clean prompt — the placeholder is blanked out at construction time.
 STATE_PLACEHOLDER = "{{CONTROLLER_STATE}}"
 
+# Persona prompts carry this token where the pinned ground-truth facts block
+# renders in (ROLE-019). A no-op on prompts that don't have it — set_facts()
+# is safe to call unconditionally.
+PINNED_FACTS_PLACEHOLDER = "{{PINNED_FACTS}}"
+
 
 def _ollama_chat(messages: list[dict], max_tokens: int = MAX_TOKENS) -> tuple[str, float]:
     """Call the local Ollama server; return (text, elapsed_seconds).
@@ -65,9 +70,21 @@ class PersonaAgent:
             raise RuntimeError("GROQ_API_KEY is not set — run `make doctor`")
         self._client = Groq(api_key=api_key)
         self._prompt_template = system_prompt
+        self._state_block = ""
+        self._facts_block = ""
         self._history: list[dict] = [
-            {"role": "system", "content": system_prompt.replace(STATE_PLACEHOLDER, "")}
+            {"role": "system", "content": self._render_system_prompt()}
         ]
+
+    def _render_system_prompt(self) -> str:
+        """Render both the controller-state and pinned-facts blocks together.
+
+        Each block is tracked independently and re-rendered from the pristine
+        template every time — calling set_state() must not discard whatever
+        set_facts() last set, and vice versa.
+        """
+        text = self._prompt_template.replace(STATE_PLACEHOLDER, self._state_block)
+        return text.replace(PINNED_FACTS_PLACEHOLDER, self._facts_block)
 
     def set_state(self, state_block: str) -> None:
         """Re-render the system prompt's controller-state block.
@@ -75,9 +92,17 @@ class PersonaAgent:
         Always renders fresh from the original template — never accumulates
         old state blocks on top of each other.
         """
-        self._history[0]["content"] = self._prompt_template.replace(
-            STATE_PLACEHOLDER, state_block
-        )
+        self._state_block = state_block
+        self._history[0]["content"] = self._render_system_prompt()
+
+    def set_facts(self, facts_block: str) -> None:
+        """Re-render the system prompt's pinned-facts block.
+
+        Same fresh-render-from-template discipline as set_state(). A no-op on
+        prompts without {{PINNED_FACTS}} — safe to call unconditionally.
+        """
+        self._facts_block = facts_block
+        self._history[0]["content"] = self._render_system_prompt()
 
     def _call_groq(self, messages: list[dict]) -> tuple[str, float, object]:
         """Return (text, elapsed, usage) from Groq."""

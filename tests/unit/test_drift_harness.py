@@ -41,7 +41,8 @@ PERSONA_REPLIES = [
 
 
 def test_drift_harness_flags_without_live_inference(capsys):
-    assert len(PERSONA_REPLIES) == len(drift_harness.SCRIPTED_REPLIES) + 1
+    scripted_replies = drift_harness.FIXTURES["order-change"].scripted_replies
+    assert len(PERSONA_REPLIES) == len(scripted_replies) + 1
 
     with patch.dict("os.environ", {"GROQ_API_KEY": "test-key"}):
         with patch("role.persona.Groq") as mock_groq_cls:
