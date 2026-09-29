@@ -24,6 +24,7 @@ from fastapi import FastAPI, Form, Request
 from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
 
 from role.coach import CoachAgent
 from role.controller import Controller
@@ -40,6 +41,11 @@ STATIC_DIR = Path(__file__).parent / "static"
 app = FastAPI(title="ROLE — Roleplay & Skills Coach")
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 templates = Jinja2Templates(directory=TEMPLATES_DIR)
+
+# Safe/free no-op without OTEL_EXPORTER_OTLP_ENDPOINT set (role.tracing) — one
+# span per request either way, and route handlers' persona/evaluator/coach
+# spans nest under it (anyio's threadpool dispatch propagates contextvars).
+FastAPIInstrumentor().instrument_app(app)
 
 
 @dataclass

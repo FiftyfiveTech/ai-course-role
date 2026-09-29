@@ -13,6 +13,7 @@ from role.controller import Controller
 from role.logger import SessionLogger, SESSIONS_DIR
 from role.persona import PersonaAgent
 from role.scenario import Scenario, load, SCENARIOS_DIR
+from role.tracing import get_tracer
 
 TOTAL_TURNS = 10  # persona opens + (trainee + persona) × 4 + trainee closes = 10
 DOCS_SCORECARDS_DIR = Path(__file__).parent.parent.parent / "docs" / "scorecards"
@@ -59,61 +60,66 @@ def run(
     persona = PersonaAgent(system_prompt)
     controller = Controller(scenario.difficulty)
 
-    print()
-    print("=" * 62)
-    print("  ROLE — Roleplay & Skills Coach")
-    print(f"  Scenario : {scenario.title}  [{scenario.difficulty}]")
-    print(f"  Situation: {scenario.situation}")
-    print(f"  Goal     : {scenario.goal}")
-    print(f"  Persona  : {scenario.persona_name} — openai/gpt-oss-120b via Groq")
-    print(f"  Session  : {n_turns} turns  |  id: {logger.session_id}")
-    print("=" * 62)
-    print()
+    with get_tracer().start_as_current_span("session.run") as root_span:
+        root_span.set_attribute("scenario_id", scenario.id)
+        root_span.set_attribute("session_id", logger.session_id)
+        root_span.set_attribute("difficulty", scenario.difficulty)
 
-    # Persona opens (turn 1)
-    state = controller.initial_state()
-    persona.set_state(state.render())
-    opening = persona.reply(scenario.opening, logger=logger, controller_state=state.to_dict())
-    print(f"Alex : {opening}")
-    print()
+        print()
+        print("=" * 62)
+        print("  ROLE — Roleplay & Skills Coach")
+        print(f"  Scenario : {scenario.title}  [{scenario.difficulty}]")
+        print(f"  Situation: {scenario.situation}")
+        print(f"  Goal     : {scenario.goal}")
+        print(f"  Persona  : {scenario.persona_name} — openai/gpt-oss-120b via Groq")
+        print(f"  Session  : {n_turns} turns  |  id: {logger.session_id}")
+        print("=" * 62)
+        print()
 
-    persona_turns = 1
-    trainee_turns = 0
-
-    while persona_turns + trainee_turns < n_turns:
-        # Trainee speaks
-        if trainee_lines is not None:
-            line = trainee_lines[trainee_turns].strip()
-        else:
-            try:
-                line = input("You  : ").strip()
-            except (EOFError, KeyboardInterrupt):
-                print("\n[session interrupted]")
-                return None
-        if not line:
-            line = "[no response]"
-        state = controller.step(line)
-        logger.log(role="trainee", content=line, controller_state=state.to_dict())
-        trainee_turns += 1
-
-        if persona_turns + trainee_turns >= n_turns:
-            break
-
-        # Persona replies
+        # Persona opens (turn 1)
+        state = controller.initial_state()
         persona.set_state(state.render())
-        reply = persona.reply(line, logger=logger, controller_state=state.to_dict())
-        print(f"\nAlex : {reply}\n")
-        persona_turns += 1
+        opening = persona.reply(scenario.opening, logger=logger, controller_state=state.to_dict())
+        print(f"Alex : {opening}")
+        print()
 
-    wall_secs = time.perf_counter() - wall_start
-    _print_cost_meter(logger.session_id, persona_turns + trainee_turns, wall_secs)
+        persona_turns = 1
+        trainee_turns = 0
 
-    print()
-    print("=" * 62)
-    print(f"  Session complete — {persona_turns} persona turns, {trainee_turns} trainee turns.")
-    print("=" * 62)
+        while persona_turns + trainee_turns < n_turns:
+            # Trainee speaks
+            if trainee_lines is not None:
+                line = trainee_lines[trainee_turns].strip()
+            else:
+                try:
+                    line = input("You  : ").strip()
+                except (EOFError, KeyboardInterrupt):
+                    print("\n[session interrupted]")
+                    return None
+            if not line:
+                line = "[no response]"
+            state = controller.step(line)
+            logger.log(role="trainee", content=line, controller_state=state.to_dict())
+            trainee_turns += 1
 
-    return logger.session_id
+            if persona_turns + trainee_turns >= n_turns:
+                break
+
+            # Persona replies
+            persona.set_state(state.render())
+            reply = persona.reply(line, logger=logger, controller_state=state.to_dict())
+            print(f"\nAlex : {reply}\n")
+            persona_turns += 1
+
+        wall_secs = time.perf_counter() - wall_start
+        _print_cost_meter(logger.session_id, persona_turns + trainee_turns, wall_secs)
+
+        print()
+        print("=" * 62)
+        print(f"  Session complete — {persona_turns} persona turns, {trainee_turns} trainee turns.")
+        print("=" * 62)
+
+        return logger.session_id
 
 
 def demo(
@@ -142,20 +148,25 @@ def demo(
     if out_dir is None:
         out_dir = DOCS_SCORECARDS_DIR
 
-    session_id = run(n_turns=n_turns, scenario=scenario, trainee_lines=trainee_lines)
-    if session_id is None:
-        return None
+    with get_tracer().start_as_current_span("session.demo"):
+        # session.run's own span nests under this one (same-thread call, no
+        # context boundary), and so do evaluator.evaluate/coach.plan below —
+        # the whole demo pipeline reads as one trace, not three disconnected
+        # ones.
+        session_id = run(n_turns=n_turns, scenario=scenario, trainee_lines=trainee_lines)
+        if session_id is None:
+            return None
 
-    scorecard = EvaluatorAgent().evaluate(session_id)
-    plan = CoachAgent().plan(scorecard)
-    html_text = render_scorecard_html(scorecard, plan)
+        scorecard = EvaluatorAgent().evaluate(session_id)
+        plan = CoachAgent().plan(scorecard)
+        html_text = render_scorecard_html(scorecard, plan)
 
-    out_dir.mkdir(parents=True, exist_ok=True)
-    out_path = out_dir / f"{session_id}.html"
-    out_path.write_text(html_text, encoding="utf-8")
+        out_dir.mkdir(parents=True, exist_ok=True)
+        out_path = out_dir / f"{session_id}.html"
+        out_path.write_text(html_text, encoding="utf-8")
 
-    print()
-    print(f"Scorecard : {scorecard.total}/{scorecard.max}")
-    print(f"Written   : {out_path}")
+        print()
+        print(f"Scorecard : {scorecard.total}/{scorecard.max}")
+        print(f"Written   : {out_path}")
 
-    return out_path
+        return out_path

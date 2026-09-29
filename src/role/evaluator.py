@@ -22,6 +22,7 @@ from pydantic import BaseModel, model_validator
 
 from role import logger as _logger_mod
 from role.scorecard import RUBRIC_ITEMS, Scorecard, ScoreItem
+from role.tracing import get_tracer
 
 if TYPE_CHECKING:
     from role.logger import SessionLogger
@@ -112,33 +113,41 @@ class EvaluatorAgent:
         prompt_tokens = completion_tokens = None
 
         t0 = time.perf_counter()
-        try:
-            result, completion = self._client.chat.completions.create_with_completion(
-                model=GROQ_API_MODEL_ID,
-                messages=messages,
-                response_model=_RubricScores,
-                max_retries=MAX_RETRIES,
-                temperature=0.0,
-            )
-            prompt_tokens = completion.usage.prompt_tokens
-            completion_tokens = completion.usage.completion_tokens
-        except RateLimitError as exc:
-            print(
-                f"[arm-policy] Groq 429/cap — evaluator falling back to Ollama"
-                f" ({OLLAMA_MODEL}): {exc}"
-            )
-            ollama_client = instructor.from_openai(
-                OpenAI(base_url=OLLAMA_BASE_URL, api_key="ollama"), mode=instructor.Mode.JSON
-            )
-            result, _ = ollama_client.chat.completions.create_with_completion(
-                model=OLLAMA_MODEL,
-                messages=messages,
-                response_model=_RubricScores,
-                max_retries=MAX_RETRIES,
-                temperature=0.0,
-            )
-            model_used = OLLAMA_MODEL
-        elapsed = time.perf_counter() - t0
+        with get_tracer().start_as_current_span("evaluator.evaluate") as span:
+            span.set_attribute("session_id", session_id)
+            try:
+                result, completion = self._client.chat.completions.create_with_completion(
+                    model=GROQ_API_MODEL_ID,
+                    messages=messages,
+                    response_model=_RubricScores,
+                    max_retries=MAX_RETRIES,
+                    temperature=0.0,
+                )
+                prompt_tokens = completion.usage.prompt_tokens
+                completion_tokens = completion.usage.completion_tokens
+            except RateLimitError as exc:
+                print(
+                    f"[arm-policy] Groq 429/cap — evaluator falling back to Ollama"
+                    f" ({OLLAMA_MODEL}): {exc}"
+                )
+                ollama_client = instructor.from_openai(
+                    OpenAI(base_url=OLLAMA_BASE_URL, api_key="ollama"), mode=instructor.Mode.JSON
+                )
+                result, _ = ollama_client.chat.completions.create_with_completion(
+                    model=OLLAMA_MODEL,
+                    messages=messages,
+                    response_model=_RubricScores,
+                    max_retries=MAX_RETRIES,
+                    temperature=0.0,
+                )
+                model_used = OLLAMA_MODEL
+            elapsed = time.perf_counter() - t0
+
+            span.set_attribute("model", model_used)
+            span.set_attribute("seconds", elapsed)
+            if prompt_tokens is not None:
+                span.set_attribute("tokens.prompt", prompt_tokens)
+                span.set_attribute("tokens.completion", completion_tokens)
 
         scorecard = Scorecard(
             session_id=session_id,

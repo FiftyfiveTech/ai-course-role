@@ -1,14 +1,17 @@
-.PHONY: setup doctor test gate demo coach web clean
+.PHONY: setup doctor test gate demo coach web otel-up otel-down clean
 .DEFAULT_GOAL := help
 
 help:
-	@echo "make setup   create the venv and install deps (uv)"
-	@echo "make doctor  check HF_TOKEN, Groq and Ollama — PASS/FAIL per dep"
-	@echo "make test    unit tests"
-	@echo "make gate    run every phase gate in tests/gates/"
-	@echo "make demo    run the thing end to end"
-	@echo "make coach   serve the concept primer at http://localhost:8000/role-day1.html"
-	@echo "make web     serve the roleplay webapp at http://localhost:8080"
+	@echo "make setup     create the venv and install deps (uv)"
+	@echo "make doctor    check HF_TOKEN, Groq and Ollama — PASS/FAIL per dep"
+	@echo "make test      unit tests"
+	@echo "make gate      run every phase gate in tests/gates/"
+	@echo "make demo      run the thing end to end"
+	@echo "make coach     serve the concept primer at http://localhost:8000/role-day1.html"
+	@echo "make web       serve the roleplay webapp at http://localhost:8080"
+	@echo "make otel-up   start Tempo + Grafana; set OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318"
+	@echo "               in .env, then view traces at http://localhost:3000 (Explore -> Tempo)"
+	@echo "make otel-down stop the tracing stack"
 
 setup:
 	@command -v uv >/dev/null || { echo "uv not installed: curl -LsSf https://astral.sh/uv/install.sh | sh"; exit 1; }
@@ -35,6 +38,14 @@ coach:
 
 web:
 	@test -f .env && . ./.env; uv run uvicorn role.webapp:app --app-dir src --reload --reload-dir src --port 8080
+
+otel-up:
+	docker compose up -d
+	@echo "Tempo   : http://localhost:4318 (OTLP/HTTP — set OTEL_EXPORTER_OTLP_ENDPOINT to this in .env)"
+	@echo "Grafana : http://localhost:3000 (Explore -> Tempo datasource, pre-provisioned)"
+
+otel-down:
+	docker compose down
 
 clean:
 	rm -rf .venv .pytest_cache **/__pycache__
