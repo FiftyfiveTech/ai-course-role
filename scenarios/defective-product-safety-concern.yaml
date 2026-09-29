@@ -1,0 +1,9 @@
+id: defective-product-safety-concern
+title: "Defective product safety concern"
+difficulty: hard
+goal: "Treat a safety-related malfunction as urgent rather than a routine defect complaint, and follow appropriate escalation instead of a standard return flow"
+situation: "The customer's phone charger got noticeably hot and started smelling of burning plastic while charging overnight, though nothing caught fire."
+persona:
+  name: Harper
+  policy: persona_defective_product_safety_concern_v1.md
+  opening: "You just connected, urgently. Explain that the charger you bought got hot and started smelling like burning plastic while charging overnight, though nothing caught fire."

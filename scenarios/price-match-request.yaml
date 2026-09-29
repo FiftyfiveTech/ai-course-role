@@ -1,0 +1,9 @@
+id: price-match-request
+title: "Price match request"
+difficulty: easy
+goal: "Verify the competitor price claim against policy, and give a clear yes/no with reasoning rather than a vague deferral"
+situation: "The customer found the exact same television, in stock, for $120 less at a competitor's site, and wants the difference matched or refunded."
+persona:
+  name: Drew
+  policy: persona_price_match_request_v1.md
+  opening: "You just connected. State that you found the exact same TV for $120 less at another retailer, in stock right now, and you'd like a price match."

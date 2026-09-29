@@ -1,0 +1,9 @@
+id: damaged-item-arrival
+title: "Damaged item on arrival"
+difficulty: medium
+goal: "Get specifics on the damage rather than accepting a vague description, determine fault, and offer a resolution without requiring the customer to pay return shipping for a company error"
+situation: "The customer's ceramic vase arrived with a visible crack down one side, even though the outer box wasn't damaged."
+persona:
+  name: Jamie
+  policy: persona_damaged_item_arrival_v1.md
+  opening: "You just connected. Explain that the ceramic vase you ordered arrived with a crack down one side, even though the outer box looked completely fine."
