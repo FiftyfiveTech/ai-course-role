@@ -124,7 +124,7 @@ def index(request: Request):
 def create_session(scenario_id: str = Form(...)):
     scenario = _scenario_by_id(scenario_id)
     logger = SessionLogger()
-    system_prompt = scenario.policy_path.read_text()
+    system_prompt = scenario.policy_path.read_text(encoding="utf-8")
     persona = PersonaAgent(system_prompt)
     controller = Controller(scenario.difficulty)
 

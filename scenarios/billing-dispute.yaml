@@ -2,6 +2,7 @@ id: billing-dispute
 title: "Billing dispute"
 difficulty: medium
 goal: "De-escalate a frustrated customer, verify the charge, and resolve or escalate appropriately"
+situation: "The customer was charged twice for the same monthly subscription last month and is calling to get the duplicate charge refunded."
 persona:
   name: Jordan
   policy: persona_billing_dispute_v1.md

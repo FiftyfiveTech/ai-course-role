@@ -14,7 +14,8 @@
 {% for s in scenarios %}
 <div class="scenario-card">
   <h3>{{ s.title }} <span class="muted">[{{ s.difficulty }}]</span></h3>
-  <p>{{ s.goal }}</p>
+  <p>{{ s.situation }}</p>
+  <p class="muted">Practising: {{ s.goal }}</p>
   <p class="muted">Persona: {{ s.persona_name }}</p>
   <form method="post" action="/session">
     <input type="hidden" name="scenario_id" value="{{ s.id }}" />

@@ -6,7 +6,10 @@ Schema (all fields required):
   id:         str   — slug used as filename stem
   title:      str   — display name
   difficulty: str   — easy | medium | hard
-  goal:       str   — what the trainee should practise
+  goal:       str   — the skill the trainee should practise (a coaching objective)
+  situation:  str   — the customer's problem in plain language, shown to the trainee
+                       before/during the session — consistent with, but not parsed
+                       from, the persona policy prompt's own "## Situation" section
   persona:
     name:     str   — character name shown in the session header
     policy:   str   — prompt filename relative to prompts/
@@ -24,7 +27,7 @@ import yaml
 SCENARIOS_DIR = Path(__file__).parent.parent.parent / "scenarios"
 PROMPTS_DIR = Path(__file__).parent.parent.parent / "prompts"
 
-_REQUIRED_TOP = {"id", "title", "difficulty", "goal", "persona"}
+_REQUIRED_TOP = {"id", "title", "difficulty", "goal", "situation", "persona"}
 _REQUIRED_PERSONA = {"name", "policy", "opening"}
 _VALID_DIFFICULTY = {"easy", "medium", "hard"}
 
@@ -35,6 +38,7 @@ class Scenario:
     title: str
     difficulty: str
     goal: str
+    situation: str      # the customer's problem, in plain language, for the trainee
     persona_name: str
     policy_path: Path   # absolute path to the prompt file
     opening: str        # instruction that produces the persona's first utterance
@@ -46,7 +50,7 @@ def load(path: Path) -> Scenario:
         raise ValueError(f"Scenario file not found: {path}")
 
     try:
-        raw: Any = yaml.safe_load(path.read_text())
+        raw: Any = yaml.safe_load(path.read_text(encoding="utf-8"))
     except yaml.YAMLError as exc:
         raise ValueError(f"YAML parse error in {path}: {exc}") from exc
 
@@ -79,6 +83,7 @@ def load(path: Path) -> Scenario:
         title=str(raw["title"]),
         difficulty=difficulty,
         goal=str(raw["goal"]),
+        situation=str(raw["situation"]),
         persona_name=str(persona["name"]),
         policy_path=policy_path,
         opening=str(persona["opening"]),

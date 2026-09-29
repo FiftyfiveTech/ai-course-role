@@ -65,7 +65,7 @@ class SessionLogger:
         """
         if not self._path.exists():
             return 1
-        lines = [ln.strip() for ln in self._path.read_text().splitlines() if ln.strip()]
+        lines = [ln.strip() for ln in self._path.read_text(encoding="utf-8").splitlines() if ln.strip()]
         if not lines:
             raise ValueError(
                 f"Session file {self._path} exists but contains no turn records. "

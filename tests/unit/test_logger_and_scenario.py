@@ -86,6 +86,7 @@ def test_malformed_scenario_bad_difficulty_raises(tmp_path):
         "title: Bad difficulty\n"
         "difficulty: legendary\n"
         "goal: something\n"
+        "situation: something\n"
         "persona:\n"
         "  name: Bob\n"
         "  policy: persona_v1.md\n"
@@ -132,6 +133,7 @@ def test_malformed_scenario_missing_persona_fields_raises(tmp_path):
         "title: Incomplete persona\n"
         "difficulty: easy\n"
         "goal: something\n"
+        "situation: something\n"
         "persona:\n"
         "  name: Bob\n"
     )

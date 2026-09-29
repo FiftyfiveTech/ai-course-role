@@ -21,7 +21,7 @@ DOCS_SCORECARDS_DIR = Path(__file__).parent.parent.parent / "docs" / "scorecards
 def _print_cost_meter(session_id: str, n_turns: int, wall_secs: float) -> None:
     """Print one summary line: cost, turns, model time, wall time."""
     path = SESSIONS_DIR / f"{session_id}.jsonl"
-    records = [json.loads(ln) for ln in path.read_text().splitlines() if ln.strip()]
+    records = [json.loads(ln) for ln in path.read_text(encoding="utf-8").splitlines() if ln.strip()]
     total_cost = sum(r["cost_usd"] for r in records if r["cost_usd"] is not None)
     model_secs = sum(r["seconds"] for r in records if r["seconds"] is not None)
     print(
@@ -55,7 +55,7 @@ def run(
 
     wall_start = time.perf_counter()
     logger = SessionLogger(session_id)
-    system_prompt = scenario.policy_path.read_text()
+    system_prompt = scenario.policy_path.read_text(encoding="utf-8")
     persona = PersonaAgent(system_prompt)
     controller = Controller(scenario.difficulty)
 
@@ -63,6 +63,7 @@ def run(
     print("=" * 62)
     print("  ROLE — Roleplay & Skills Coach")
     print(f"  Scenario : {scenario.title}  [{scenario.difficulty}]")
+    print(f"  Situation: {scenario.situation}")
     print(f"  Goal     : {scenario.goal}")
     print(f"  Persona  : {scenario.persona_name} — openai/gpt-oss-120b via Groq")
     print(f"  Session  : {n_turns} turns  |  id: {logger.session_id}")

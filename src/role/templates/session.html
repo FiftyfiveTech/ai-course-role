@@ -8,7 +8,8 @@
 <header>
   <div class="label">ROLE · Session {{ session_id }}</div>
   <h1>{{ scenario.title }} <span class="muted">[{{ scenario.difficulty }}]</span></h1>
-  <p>{{ scenario.goal }}</p>
+  <p>{{ scenario.situation }}</p>
+  <p class="muted">Practising: {{ scenario.goal }}</p>
 </header>
 <div class="transcript">
   {% for turn in transcript %}
