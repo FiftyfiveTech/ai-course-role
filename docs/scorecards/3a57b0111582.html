@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ROLE Scorecard — 3a57b0111582</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --border: #2a2d3a;
+      --accent: #5b8def;
+      --warn: #e8a838;
+      --ok: #4caf82;
+      --bad: #e8646b;
+      --text: #d4d8e8;
+      --muted: #7a7f99;
+      --code-bg: #12141e;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.7;
+      padding: 2rem 1rem 4rem;
+    }
+    .page { max-width: 780px; margin: 0 auto; }
+    header { margin-bottom: 2.5rem; }
+    header .label {
+      font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); font-weight: 600; margin-bottom: 0.5rem;
+    }
+    header h1 { font-size: 1.8rem; font-weight: 700; line-height: 1.2; }
+    header p { color: var(--muted); margin-top: 0.5rem; font-size: 0.95rem; }
+    h2 {
+      font-size: 1.2rem; font-weight: 600; margin: 2.5rem 0 0.75rem;
+      padding-bottom: 0.4rem; border-bottom: 1px solid var(--border);
+    }
+    .item {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; padding: 1.1rem 1.3rem; margin: 1rem 0;
+    }
+    .item-head {
+      display: flex; justify-content: space-between; align-items: baseline;
+      margin-bottom: 0.6rem;
+    }
+    .item-name { font-weight: 700; }
+    .score { font-weight: 700; font-size: 0.9rem; }
+    .score.s2 { color: var(--ok); }
+    .score.s1 { color: var(--warn); }
+    .score.s0 { color: var(--bad); }
+    .evidence {
+      background: var(--code-bg); border-left: 3px solid var(--accent);
+      border-radius: 4px; padding: 0.6rem 0.9rem; margin-top: 0.5rem;
+      font-size: 0.88rem; color: var(--muted);
+    }
+    .evidence .turn-id {
+      font-family: "JetBrains Mono", "Fira Code", monospace;
+      color: var(--accent); font-size: 0.78rem;
+    }
+    .evidence .turn-text { color: var(--text); margin-top: 0.15rem; }
+    .plan-item {
+      background: var(--surface); border-left: 3px solid var(--ok);
+      border-radius: 6px; padding: 0.9rem 1.2rem; margin: 1rem 0;
+    }
+    .plan-item .rubric-item {
+      font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;
+      font-weight: 700; color: var(--ok); margin-bottom: 0.3rem;
+    }
+    footer {
+      margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--border);
+      font-size: 0.8rem; color: var(--muted);
+    }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div class="label">ROLE · Scorecard</div>
+    <h1>Session 3a57b0111582</h1>
+    <p>2 / 12 — rubric version evals/RUBRIC.md</p>
+  </header>
+
+  <h2>Rubric scores</h2>
+  <div class="item"><div class="item-head"><span class="item-name">question_coverage</span><span class="score s2">2/2</span></div><div class="evidence"><div class="turn-id">3a57b0111582:4</div><div class="turn-text">trainee: When did you buy this? Can you provide me a Order ID or something?</div></div><div class="evidence"><div class="turn-id">3a57b0111582:6</div><div class="turn-text">trainee: What was your original order?</div></div></div><div class="item"><div class="item-head"><span class="item-name">listening_ratio</span><span class="score s0">0/2</span></div><div class="evidence"><div class="turn-id">3a57b0111582:2</div><div class="turn-text">trainee: Hi, please stay ensured. You will be listedened to.</div></div></div><div class="item"><div class="item-head"><span class="item-name">factual_accuracy</span><span class="score s0">0/2</span></div><div class="evidence"><div class="turn-id">3a57b0111582:8</div><div class="turn-text">trainee: No this is not possible anymore. Though you can reject the delivery. It will be marked cancelled and you will be refunded. Then you can order a fresh orde</div></div></div><div class="item"><div class="item-head"><span class="item-name">policy_adherence</span><span class="score s0">0/2</span></div><div class="evidence"><div class="turn-id">3a57b0111582:8</div><div class="turn-text">trainee: No this is not possible anymore. Though you can reject the delivery. It will be marked cancelled and you will be refunded. Then you can order a fresh orde</div></div></div><div class="item"><div class="item-head"><span class="item-name">objection_handling</span><span class="score s0">0/2</span></div><div class="evidence"><div class="turn-id">3a57b0111582:10</div><div class="turn-text">trainee: Bye</div></div></div><div class="item"><div class="item-head"><span class="item-name">clarity</span><span class="score s0">0/2</span></div><div class="evidence"><div class="turn-id">3a57b0111582:10</div><div class="turn-text">trainee: Bye</div></div></div>
+
+  <h2>Learning plan</h2>
+  <div class="plan-item"><div class="rubric-item">listening_ratio</div><div>Increase active listening by summarizing client statements before responding and using reflective listening techniques to confirm understanding.</div></div><div class="plan-item"><div class="rubric-item">factual_accuracy</div><div>Verify all factual claims against reliable sources before responding; incorporate a brief fact‑check step in your preparation.</div></div><div class="plan-item"><div class="rubric-item">policy_adherence</div><div>Review the organization’s policy guidelines and ensure all responses align with them; double‑check policy references before finalizing.</div></div><div class="plan-item"><div class="rubric-item">objection_handling</div><div>Practice structured objection handling: acknowledge the objection, provide evidence‑based counterpoints, and offer alternative solutions.</div></div><div class="plan-item"><div class="rubric-item">clarity</div><div>Use concise, jargon‑free language; structure responses with clear headings or bullet points to enhance readability.</div></div>
+
+  <footer>ROLE — Roleplay &amp; Skills Coach · every score above cites the real transcript turn it is grounded in</footer>
+</div>
+</body>
+</html>

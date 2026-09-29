@@ -1,4 +1,4 @@
-.PHONY: setup doctor test gate demo coach clean
+.PHONY: setup doctor test gate demo coach web clean
 .DEFAULT_GOAL := help
 
 help:
@@ -8,6 +8,7 @@ help:
 	@echo "make gate    run every phase gate in tests/gates/"
 	@echo "make demo    run the thing end to end"
 	@echo "make coach   serve the concept primer at http://localhost:8000/role-day1.html"
+	@echo "make web     serve the roleplay webapp at http://localhost:8080"
 
 setup:
 	@command -v uv >/dev/null || { echo "uv not installed: curl -LsSf https://astral.sh/uv/install.sh | sh"; exit 1; }
@@ -26,11 +27,14 @@ gate:
 	@test -f .env && . ./.env; uv run pytest tests/gates -s -q
 
 demo:
-	@test -f .env && . ./.env; uv run python -c "from role.session import run; run()"
+	@test -f .env && . ./.env; uv run python scripts/roleplay.py
 
 coach:
 	@echo "Serving coach pages at http://localhost:8000/role-day1.html"
 	python3 -m http.server 8000 --directory docs
+
+web:
+	@test -f .env && . ./.env; uv run uvicorn role.webapp:app --app-dir src --reload --port 8080
 
 clean:
 	rm -rf .venv .pytest_cache **/__pycache__

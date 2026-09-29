@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Session {{ session_id }}{% endblock %}
+{% block content %}
+{% if done %}
+  {{ report_html | safe }}
+  <p><a class="button" href="/history">Back to history</a></p>
+{% else %}
+<header>
+  <div class="label">ROLE · Session {{ session_id }}</div>
+  <h1>{{ scenario.title }} <span class="muted">[{{ scenario.difficulty }}]</span></h1>
+  <p>{{ scenario.goal }}</p>
+</header>
+<div class="transcript">
+  {% for turn in transcript %}
+  <div class="turn {{ turn.role }}">
+    <div class="speaker">{{ scenario.persona_name if turn.role == 'persona' else 'You' }}</div>
+    <div>{{ turn.text }}</div>
+  </div>
+  {% endfor %}
+</div>
+<form method="post" action="/session/{{ session_id }}/turn" class="turn-form">
+  <input type="text" name="line" autofocus placeholder="Type your reply…" />
+  <button type="submit">Send</button>
+</form>
+{% endif %}
+{% endblock %}

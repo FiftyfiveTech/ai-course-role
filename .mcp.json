@@ -1,9 +1,15 @@
 {
   "mcpServers": {
     "odoo-board": {
-      "command": "python3",
+      "command": "python",
       "args": ["${AI_COURSE_KIT}/odoo_board_mcp.py"],
-      "env": {}
+      "env": {
+        "ODOO_URL": "https://odoo.fiftyfivetech.io",
+        "ODOO_DB": "odoo-db",
+        "ODOO_PROJECT_ID": "81",
+        "ODOO_PROJECT_NAME": "ROLE — Roleplay & Skills Coach",
+        "ODOO_DONE_STAGE_ID": "2124"
+      }
     }
   }
 }

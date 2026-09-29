@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}ROLE{% endblock %}</title>
+  <link rel="stylesheet" href="/static/theme.css" />
+</head>
+<body>
+<div class="page">
+  <nav class="top">
+    <a href="/" class="{{ 'active' if active == 'new' else '' }}">New Session</a>
+    <a href="/history" class="{{ 'active' if active == 'history' else '' }}">History</a>
+  </nav>
+  {% block content %}{% endblock %}
+</div>
+</body>
+</html>
