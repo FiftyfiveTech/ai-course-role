@@ -34,7 +34,7 @@ coach:
 	python3 -m http.server 8000 --directory docs
 
 web:
-	@test -f .env && . ./.env; uv run uvicorn role.webapp:app --app-dir src --reload --port 8080
+	@test -f .env && . ./.env; uv run uvicorn role.webapp:app --app-dir src --reload --reload-dir src --port 8080
 
 clean:
 	rm -rf .venv .pytest_cache **/__pycache__

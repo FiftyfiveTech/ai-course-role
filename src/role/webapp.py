@@ -15,6 +15,7 @@ Completed sessions need no registry entry — they're re-scored from
 sessions/<id>.jsonl on demand, same as `scripts/roleplay.py --render` today.
 """
 
+import threading
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional
@@ -61,6 +62,27 @@ class LiveSession:
 
 
 _LIVE: dict[str, LiveSession] = {}
+_LIVE_LOCK = threading.Lock()  # guards _LIVE membership only, held briefly
+
+
+def _claim_live(session_id: str) -> Optional[LiveSession]:
+    """Atomically pop *session_id* out of the registry to claim exclusive
+    processing of one turn. Route handlers here are plain `def`s, so
+    Starlette runs each request on its own threadpool thread — a duplicate
+    submit for the same session_id (easy to trigger: this route's final turn
+    takes several seconds, running live Evaluator/Coach calls, with no UI
+    feedback in between) would otherwise race a plain dict lookup + delete.
+    Returns None if there's nothing to claim (already completed, or another
+    request is already processing this session's turn)."""
+    with _LIVE_LOCK:
+        return _LIVE.pop(session_id, None)
+
+
+def _release_live(session_id: str, live: LiveSession) -> None:
+    """Put a claimed, still-in-progress session back so its next turn can
+    be processed. Not called when this turn completed the session."""
+    with _LIVE_LOCK:
+        _LIVE[session_id] = live
 
 
 def _scenario_by_id(scenario_id: str) -> Scenario:
@@ -114,7 +136,7 @@ def create_session(scenario_id: str = Form(...)):
     live.transcript.append({"role": "persona", "text": opening})
     live.persona_turns = 1
 
-    _LIVE[logger.session_id] = live
+    _release_live(logger.session_id, live)
     return RedirectResponse(f"/session/{logger.session_id}", status_code=303)
 
 
@@ -138,7 +160,12 @@ def view_session(request: Request, session_id: str):
 
 @app.post("/session/{session_id}/turn")
 def post_turn(request: Request, session_id: str, line: str = Form(...)):
-    live = _LIVE[session_id]
+    live = _claim_live(session_id)
+    if live is None:
+        # Nothing to claim — already completed, or another request is mid-
+        # flight processing this same session's turn (e.g. a duplicate
+        # submit). Its report lives in history once scored.
+        return RedirectResponse(f"/history/{session_id}", status_code=303)
     line = line.strip() or "[no response]"
 
     state = live.controller.step(line)
@@ -149,12 +176,13 @@ def post_turn(request: Request, session_id: str, line: str = Form(...)):
     report_html = None
     if live.done:
         report_html = _score_and_render(session_id)
-        del _LIVE[session_id]
+        # Already popped by _claim_live() above — nothing to remove.
     else:
         live.persona.set_state(state.render())
         reply = live.persona.reply(line, logger=live.logger, controller_state=state.to_dict())
         live.transcript.append({"role": "persona", "text": reply})
         live.persona_turns += 1
+        _release_live(session_id, live)
 
     return templates.TemplateResponse(
         request,

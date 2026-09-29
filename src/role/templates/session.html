@@ -18,7 +18,8 @@
   </div>
   {% endfor %}
 </div>
-<form method="post" action="/session/{{ session_id }}/turn" class="turn-form">
+<form method="post" action="/session/{{ session_id }}/turn" class="turn-form"
+      onsubmit="this.querySelector('button').disabled = true; this.querySelector('button').textContent = 'Sending…';">
   <input type="text" name="line" autofocus placeholder="Type your reply…" />
   <button type="submit">Send</button>
 </form>
