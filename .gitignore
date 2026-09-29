@@ -6,5 +6,6 @@ __pycache__/
 uv.lock
 runs/
 sessions/
+logs/
 *.wav
 *.mp4

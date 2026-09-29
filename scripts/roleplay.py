@@ -31,6 +31,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 from role.coach import CoachAgent  # noqa: E402
 from role.evaluator import EvaluatorAgent  # noqa: E402
+from role.logging_config import configure_logging  # noqa: E402
 from role.scenario import load, SCENARIOS_DIR  # noqa: E402
 from role.scorecard_html import render_scorecard_html  # noqa: E402
 from role.session import DOCS_SCORECARDS_DIR, demo  # noqa: E402
@@ -70,6 +71,8 @@ def _render_existing(session_id: str) -> Path:
 
 
 def main() -> int:
+    configure_logging()
+
     parser = argparse.ArgumentParser(description="ROLE roleplay CLI + session endpoint")
     parser.add_argument(
         "--scenario", default="order-change", help="scenario id (scenarios/*.yaml stem)"

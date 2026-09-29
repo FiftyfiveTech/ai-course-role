@@ -10,6 +10,7 @@ printed [arm-policy] warning, same as persona.py.
 """
 
 import json
+import logging
 import os
 import time
 from pathlib import Path
@@ -26,6 +27,8 @@ from role.tracing import get_tracer
 
 if TYPE_CHECKING:
     from role.logger import SessionLogger
+
+log = logging.getLogger(__name__)
 
 GROQ_MODEL = "Qwen/Qwen3.8-27B"
 # Verified live against Groq's model list (client.models.list()) — Groq hosts
@@ -126,9 +129,9 @@ class EvaluatorAgent:
                 prompt_tokens = completion.usage.prompt_tokens
                 completion_tokens = completion.usage.completion_tokens
             except RateLimitError as exc:
-                print(
-                    f"[arm-policy] Groq 429/cap — evaluator falling back to Ollama"
-                    f" ({OLLAMA_MODEL}): {exc}"
+                log.warning(
+                    "[arm-policy] Groq 429/cap — evaluator falling back to Ollama (%s): %s",
+                    OLLAMA_MODEL, exc,
                 )
                 ollama_client = instructor.from_openai(
                     OpenAI(base_url=OLLAMA_BASE_URL, api_key="ollama"), mode=instructor.Mode.JSON

@@ -1,4 +1,4 @@
-.PHONY: setup doctor test gate demo coach web otel-up otel-down clean
+.PHONY: setup doctor test gate demo coach web otel-up otel-down logs clean
 .DEFAULT_GOAL := help
 
 help:
@@ -12,6 +12,7 @@ help:
 	@echo "make otel-up   start Tempo + Grafana; set OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318"
 	@echo "               in .env, then view traces at http://localhost:3000 (Explore -> Tempo)"
 	@echo "make otel-down stop the tracing stack"
+	@echo "make logs      tail -f logs/role.log — every line tagged with pid and trace id"
 
 setup:
 	@command -v uv >/dev/null || { echo "uv not installed: curl -LsSf https://astral.sh/uv/install.sh | sh"; exit 1; }
@@ -46,6 +47,11 @@ otel-up:
 
 otel-down:
 	docker compose down
+
+logs:
+	@mkdir -p logs
+	@touch logs/role.log
+	tail -f logs/role.log
 
 clean:
 	rm -rf .venv .pytest_cache **/__pycache__

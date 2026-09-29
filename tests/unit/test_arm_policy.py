@@ -1,4 +1,5 @@
 """Unit tests for ROLE-012 arm policy: Groq→Ollama fallback and NON-REPRODUCIBLE."""
+import logging
 from unittest.mock import MagicMock, patch
 
 import pytest
@@ -32,18 +33,18 @@ def _rate_limit_error() -> RateLimitError:
 # Fallback: Groq 429 → Ollama
 # ---------------------------------------------------------------------------
 
-def test_reply_falls_back_to_ollama_on_429(capsys):
+def test_reply_falls_back_to_ollama_on_429(caplog):
     agent = _make_agent()
     agent._client.chat.completions.create.side_effect = _rate_limit_error()
 
-    with patch("role.persona._ollama_chat", return_value=("Ollama reply", 0.5)) as mock_ollama:
-        result = agent.reply("hello")
+    with caplog.at_level(logging.WARNING, logger="role.persona"):
+        with patch("role.persona._ollama_chat", return_value=("Ollama reply", 0.5)) as mock_ollama:
+            result = agent.reply("hello")
 
     assert result == "Ollama reply"
     mock_ollama.assert_called_once()
-    captured = capsys.readouterr()
-    assert "arm-policy" in captured.out
-    assert "Ollama" in captured.out
+    assert "arm-policy" in caplog.text
+    assert "Ollama" in caplog.text
 
 
 def test_reply_uses_groq_when_no_error():
@@ -70,18 +71,18 @@ def test_repeat_returns_text_when_all_agree():
     assert result == "same reply"
 
 
-def test_repeat_returns_none_and_prints_non_reproducible_when_disagree(capsys):
+def test_repeat_returns_none_and_prints_non_reproducible_when_disagree(caplog):
     agent = _make_agent()
     replies = ["reply A", "reply B", "reply A"]
     agent._client.chat.completions.create.side_effect = [
         _groq_response(r) for r in replies
     ]
 
-    result = agent.repeat("what do you think?", n=3)
+    with caplog.at_level(logging.ERROR, logger="role.persona"):
+        result = agent.repeat("what do you think?", n=3)
 
     assert result is None
-    captured = capsys.readouterr()
-    assert "NON-REPRODUCIBLE" in captured.out
+    assert "NON-REPRODUCIBLE" in caplog.text
 
 
 def test_repeat_falls_back_to_ollama_on_429(capsys):

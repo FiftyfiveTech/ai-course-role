@@ -11,6 +11,7 @@ Arm policy
 """
 
 import json as _json
+import logging
 import os
 import time
 import urllib.request
@@ -22,6 +23,8 @@ from role.tracing import get_tracer
 
 if TYPE_CHECKING:
     from role.logger import SessionLogger
+
+log = logging.getLogger(__name__)
 
 GROQ_MODEL = "openai/gpt-oss-120b"
 OLLAMA_MODEL = "hf.co/bartowski/Mistral-7B-Instruct-v0.3-GGUF"
@@ -142,9 +145,9 @@ class PersonaAgent:
                 prompt_tokens = usage.prompt_tokens
                 completion_tokens = usage.completion_tokens
             except RateLimitError as exc:
-                print(
-                    f"[arm-policy] Groq 429/cap — falling back to Ollama"
-                    f" ({OLLAMA_MODEL}): {exc}"
+                log.warning(
+                    "[arm-policy] Groq 429/cap — falling back to Ollama (%s): %s",
+                    OLLAMA_MODEL, exc,
                 )
                 text, elapsed = _ollama_chat(self._history)
                 model_used = OLLAMA_MODEL
@@ -181,9 +184,9 @@ class PersonaAgent:
             try:
                 text, _, _ = self._call_groq(messages)
             except RateLimitError as exc:
-                print(
-                    f"[arm-policy] Groq 429/cap on repeat {i + 1}"
-                    f" — falling back to Ollama: {exc}"
+                log.warning(
+                    "[arm-policy] Groq 429/cap on repeat %d — falling back to Ollama: %s",
+                    i + 1, exc,
                 )
                 text, _ = _ollama_chat(messages)
             replies.append(text)
@@ -191,9 +194,10 @@ class PersonaAgent:
         if len(set(replies)) == 1:
             return replies[0]
 
-        print(
-            f"NON-REPRODUCIBLE — {n} runs returned {len(set(replies))} distinct replies:\n"
-            + "\n---\n".join(f"[{i + 1}] {r}" for i, r in enumerate(replies))
+        log.error(
+            "NON-REPRODUCIBLE — %d runs returned %d distinct replies:\n%s",
+            n, len(set(replies)),
+            "\n---\n".join(f"[{i + 1}] {r}" for i, r in enumerate(replies)),
         )
         return None
 

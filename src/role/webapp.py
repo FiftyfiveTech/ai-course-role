@@ -15,6 +15,7 @@ Completed sessions need no registry entry — they're re-scored from
 sessions/<id>.jsonl on demand, same as `scripts/roleplay.py --render` today.
 """
 
+import logging
 import threading
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -30,10 +31,14 @@ from role.coach import CoachAgent
 from role.controller import Controller
 from role.evaluator import EvaluatorAgent
 from role.logger import SessionLogger, SESSIONS_DIR
+from role.logging_config import configure_logging
 from role.persona import PersonaAgent
 from role.scenario import Scenario, load_all, SCENARIOS_DIR
 from role.scorecard_html import render_report_fragment, render_scorecard_html
 from role.session import DOCS_SCORECARDS_DIR, TOTAL_TURNS
+
+configure_logging()
+log = logging.getLogger(__name__)
 
 TEMPLATES_DIR = Path(__file__).parent / "templates"
 STATIC_DIR = Path(__file__).parent / "static"
@@ -113,6 +118,7 @@ def _score_and_render(session_id: str) -> str:
     html_text = render_scorecard_html(scorecard, plan)
     DOCS_SCORECARDS_DIR.mkdir(parents=True, exist_ok=True)
     (DOCS_SCORECARDS_DIR / f"{session_id}.html").write_text(html_text, encoding="utf-8")
+    log.info("session scored: session_id=%s score=%d/%d", session_id, scorecard.total, scorecard.max)
     return render_report_fragment(scorecard, plan)
 
 
@@ -143,6 +149,7 @@ def create_session(scenario_id: str = Form(...)):
     live.persona_turns = 1
 
     _release_live(logger.session_id, live)
+    log.info("session created: scenario=%s session_id=%s", scenario.id, logger.session_id)
     return RedirectResponse(f"/session/{logger.session_id}", status_code=303)
 
 
@@ -189,6 +196,11 @@ def post_turn(request: Request, session_id: str, line: str = Form(...)):
         live.transcript.append({"role": "persona", "text": reply})
         live.persona_turns += 1
         _release_live(session_id, live)
+
+    log.info(
+        "turn processed: session_id=%s persona_turns=%d trainee_turns=%d done=%s",
+        session_id, live.persona_turns, live.trainee_turns, report_html is not None,
+    )
 
     return templates.TemplateResponse(
         request,

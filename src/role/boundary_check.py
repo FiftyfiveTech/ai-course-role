@@ -13,6 +13,7 @@ Arm policy mirrors ROLE-012/persona.py/evaluator.py: Groq 429/daily-cap falls
 back to Ollama, with a printed [arm-policy] warning.
 """
 
+import logging
 import os
 import time
 from pathlib import Path
@@ -25,6 +26,8 @@ from pydantic import BaseModel
 
 if TYPE_CHECKING:
     from role.logger import SessionLogger
+
+log = logging.getLogger(__name__)
 
 GROQ_MODEL = "openai/gpt-oss-safeguard-20b"
 # Verified live against Groq's model list (client.models.list()) before writing
@@ -98,9 +101,9 @@ class BoundaryChecker:
             prompt_tokens = completion.usage.prompt_tokens
             completion_tokens = completion.usage.completion_tokens
         except RateLimitError as exc:
-            print(
-                f"[arm-policy] Groq 429/cap — boundary checker falling back to Ollama"
-                f" ({OLLAMA_MODEL}): {exc}"
+            log.warning(
+                "[arm-policy] Groq 429/cap — boundary checker falling back to Ollama (%s): %s",
+                OLLAMA_MODEL, exc,
             )
             ollama_client = instructor.from_openai(
                 OpenAI(base_url=OLLAMA_BASE_URL, api_key="ollama"), mode=instructor.Mode.JSON

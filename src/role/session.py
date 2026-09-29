@@ -5,6 +5,7 @@ The persona always opens first.
 """
 
 import json
+import logging
 import time
 from pathlib import Path
 from typing import Optional
@@ -14,6 +15,8 @@ from role.logger import SessionLogger, SESSIONS_DIR
 from role.persona import PersonaAgent
 from role.scenario import Scenario, load, SCENARIOS_DIR
 from role.tracing import get_tracer
+
+log = logging.getLogger(__name__)
 
 TOTAL_TURNS = 10  # persona opens + (trainee + persona) × 4 + trainee closes = 10
 DOCS_SCORECARDS_DIR = Path(__file__).parent.parent.parent / "docs" / "scorecards"
@@ -64,6 +67,10 @@ def run(
         root_span.set_attribute("scenario_id", scenario.id)
         root_span.set_attribute("session_id", logger.session_id)
         root_span.set_attribute("difficulty", scenario.difficulty)
+        log.info(
+            "session started: scenario=%s session_id=%s difficulty=%s",
+            scenario.id, logger.session_id, scenario.difficulty,
+        )
 
         print()
         print("=" * 62)
@@ -95,6 +102,7 @@ def run(
                     line = input("You  : ").strip()
                 except (EOFError, KeyboardInterrupt):
                     print("\n[session interrupted]")
+                    log.info("session interrupted: session_id=%s", logger.session_id)
                     return None
             if not line:
                 line = "[no response]"
@@ -118,6 +126,10 @@ def run(
         print("=" * 62)
         print(f"  Session complete — {persona_turns} persona turns, {trainee_turns} trainee turns.")
         print("=" * 62)
+        log.info(
+            "session completed: session_id=%s persona_turns=%d trainee_turns=%d",
+            logger.session_id, persona_turns, trainee_turns,
+        )
 
         return logger.session_id
 
@@ -168,5 +180,9 @@ def demo(
         print()
         print(f"Scorecard : {scorecard.total}/{scorecard.max}")
         print(f"Written   : {out_path}")
+        log.info(
+            "demo completed: session_id=%s score=%d/%d out_path=%s",
+            session_id, scorecard.total, scorecard.max, out_path,
+        )
 
         return out_path

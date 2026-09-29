@@ -13,6 +13,7 @@ Uses its own Groq client instance, separate from PersonaAgent's and
 EvaluatorAgent's — same non-self-scoring principle (ROLE-008).
 """
 
+import logging
 import os
 import time
 from pathlib import Path
@@ -25,6 +26,8 @@ from pydantic import BaseModel, Field, model_validator
 
 from role.scorecard import RUBRIC_ITEMS, Scorecard
 from role.tracing import get_tracer
+
+log = logging.getLogger(__name__)
 
 if TYPE_CHECKING:
     from role.logger import SessionLogger
@@ -125,9 +128,9 @@ class CoachAgent:
                 prompt_tokens = completion.usage.prompt_tokens
                 completion_tokens = completion.usage.completion_tokens
             except RateLimitError as exc:
-                print(
-                    f"[arm-policy] Groq 429/cap — coach falling back to Ollama"
-                    f" ({OLLAMA_MODEL}): {exc}"
+                log.warning(
+                    "[arm-policy] Groq 429/cap — coach falling back to Ollama (%s): %s",
+                    OLLAMA_MODEL, exc,
                 )
                 ollama_client = instructor.from_openai(
                     OpenAI(base_url=OLLAMA_BASE_URL, api_key="ollama"), mode=instructor.Mode.JSON
