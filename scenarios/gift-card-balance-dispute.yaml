@@ -1,6 +1,7 @@
 id: gift-card-balance-dispute
 title: "Gift card balance dispute"
 difficulty: easy
+icon: "🎁"
 goal: "Look up the actual gift card balance against what the customer expects, and explain any discrepancy with specifics rather than a generic apology"
 situation: "The customer loaded $100 onto a gift card two weeks ago but the app now shows only $35 remaining, and they haven't used it."
 persona:

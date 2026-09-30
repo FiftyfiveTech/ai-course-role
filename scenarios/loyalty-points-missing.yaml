@@ -1,6 +1,7 @@
 id: loyalty-points-missing
 title: "Loyalty points missing"
 difficulty: medium
+icon: "⭐"
 goal: "Investigate whether the points should have posted per program rules, and explain any waiting period or exclusion clearly rather than dismissively"
 situation: "The customer made a $200 purchase two weeks ago that should have earned 400 loyalty points, but their account still shows the balance from before that purchase."
 persona:

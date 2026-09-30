@@ -2,7 +2,7 @@
 
 A malformed or missing file raises ValueError immediately — no silent skips.
 
-Schema (all fields required):
+Schema (required unless noted):
   id:         str   — slug used as filename stem
   title:      str   — display name
   difficulty: str   — easy | medium | hard
@@ -10,6 +10,8 @@ Schema (all fields required):
   situation:  str   — the customer's problem in plain language, shown to the trainee
                        before/during the session — consistent with, but not parsed
                        from, the persona policy prompt's own "## Situation" section
+  icon:       str   — optional emoji shown on the scenario-picker card; defaults to
+                       DEFAULT_ICON when omitted, so older scenario files stay valid
   persona:
     name:     str   — character name shown in the session header
     policy:   str   — prompt filename relative to prompts/
@@ -30,6 +32,7 @@ PROMPTS_DIR = Path(__file__).parent.parent.parent / "prompts"
 _REQUIRED_TOP = {"id", "title", "difficulty", "goal", "situation", "persona"}
 _REQUIRED_PERSONA = {"name", "policy", "opening"}
 _VALID_DIFFICULTY = {"easy", "medium", "hard"}
+DEFAULT_ICON = "💬"
 
 
 @dataclass
@@ -39,6 +42,7 @@ class Scenario:
     difficulty: str
     goal: str
     situation: str      # the customer's problem, in plain language, for the trainee
+    icon: str           # emoji shown on the scenario-picker card
     persona_name: str
     policy_path: Path   # absolute path to the prompt file
     opening: str        # instruction that produces the persona's first utterance
@@ -84,6 +88,7 @@ def load(path: Path) -> Scenario:
         difficulty=difficulty,
         goal=str(raw["goal"]),
         situation=str(raw["situation"]),
+        icon=str(raw.get("icon", DEFAULT_ICON)),
         persona_name=str(persona["name"]),
         policy_path=policy_path,
         opening=str(persona["opening"]),

@@ -1,6 +1,7 @@
 id: delivery-delay
 title: "Delivery delay enquiry"
 difficulty: hard
+icon: "🚚"
 goal: "Manage expectations, provide accurate tracking information, and offer concrete next steps without over-promising"
 situation: "The customer's package is three days overdue and they need it for an important event tomorrow morning — tracking has shown \"Out for delivery\" for two days without updating."
 persona:

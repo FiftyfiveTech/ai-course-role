@@ -1,6 +1,7 @@
 id: service-outage-complaint
 title: "Service outage complaint"
 difficulty: hard
+icon: "📡"
 goal: "Acknowledge the impact of the outage concretely, avoid vague corporate language, and determine what compensation, if any, policy allows"
 situation: "The customer's home security service was down for six hours overnight, during which a package was stolen from their porch — they believe the outage is why they weren't alerted."
 persona:

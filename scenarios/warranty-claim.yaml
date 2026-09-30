@@ -1,6 +1,7 @@
 id: warranty-claim
 title: "Warranty claim"
 difficulty: medium
+icon: "🛡️"
 goal: "Confirm the item is within its warranty period and covered by the terms, then set clear expectations for repair versus replacement timelines"
 situation: "The customer's blender stopped working after seven months; the warranty card says one year, but they no longer have the original receipt."
 persona:
