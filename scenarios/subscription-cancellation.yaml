@@ -1,6 +1,7 @@
 id: subscription-cancellation
 title: "Subscription cancellation"
 difficulty: easy
+icon: "✂️"
 goal: "Process a cancellation request professionally without pressuring the customer to stay, while clearly confirming what happens next"
 situation: "The customer wants to cancel their monthly subscription before it renews in two days, and wants written confirmation they won't be charged again."
 persona:

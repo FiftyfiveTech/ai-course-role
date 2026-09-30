@@ -1,6 +1,7 @@
 id: membership-renewal-without-consent
 title: "Membership renewal without consent"
 difficulty: hard
+icon: "🔄"
 goal: "Address a consent and billing-transparency complaint directly, check the actual renewal-notice policy, and don't deflect into generic terms-and-conditions language"
 situation: "The customer's annual membership auto-renewed and charged them $180, but they say they never received the renewal reminder email the company claims it always sends."
 persona:

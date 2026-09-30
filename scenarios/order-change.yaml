@@ -1,6 +1,7 @@
 id: order-change
 title: "Order-change request"
 difficulty: easy
+icon: "✏️"
 goal: "Listen actively, confirm order details, and take clear action to modify the order or explain alternatives"
 situation: "The customer ordered a Bluetooth speaker two days ago and wants to change it to a different model before it ships — the website shows no self-service option to modify the order."
 persona:

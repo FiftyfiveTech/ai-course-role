@@ -66,6 +66,7 @@ def render_report_fragment(
         )
 
     session_id = scorecard.session_id
+    score_emoji = {0: "❌", 1: "⚠️", 2: "✅"}
     items_html = []
     for name in RUBRIC_ITEMS:
         item = scorecard.items[name]
@@ -80,7 +81,7 @@ def render_report_fragment(
             f'<div class="item">'
             f'<div class="item-head">'
             f'<span class="item-name">{html.escape(name)}</span>'
-            f'<span class="score s{item.score}">{item.score}/2</span>'
+            f'<span class="score s{item.score}">{score_emoji[item.score]} {item.score}/2</span>'
             f"</div>"
             f"{evidence_html}"
             f"</div>"
@@ -88,16 +89,20 @@ def render_report_fragment(
 
     plan_html = "".join(
         f'<div class="plan-item">'
-        f'<div class="rubric-item">{html.escape(p.rubric_item)}</div>'
+        f'<div class="rubric-item">💡 {html.escape(p.rubric_item)}</div>'
         f"<div>{html.escape(p.recommendation)}</div>"
         f"</div>"
         for p in plan.items
     )
 
+    pct = round(100 * scorecard.total / scorecard.max) if scorecard.max else 0
+    headline = "🏆" if pct >= 80 else "👍" if pct >= 50 else "📚"
+
     return f"""<header>
     <div class="label">ROLE · Scorecard</div>
-    <h1>Session {html.escape(session_id)}</h1>
+    <h1>{headline} Session {html.escape(session_id)}</h1>
     <p>{scorecard.total} / {scorecard.max} — rubric version {html.escape(scorecard.rubric_version)}</p>
+    <div class="score-bar"><div class="score-bar-fill" style="width: {pct}%"></div></div>
   </header>
 
   <h2>Rubric scores</h2>

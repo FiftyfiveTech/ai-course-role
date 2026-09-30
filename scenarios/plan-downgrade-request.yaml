@@ -1,6 +1,7 @@
 id: plan-downgrade-request
 title: "Plan downgrade request"
 difficulty: medium
+icon: "📉"
 goal: "Process a clearly-stated downgrade request professionally, using at most one brief retention mention before respecting a repeated 'no' and moving forward"
 situation: "The customer wants to downgrade from the premium plan to the basic plan because they stopped using most of the premium features."
 persona:

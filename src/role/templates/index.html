@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block title %}ROLE — Pick a scenario{% endblock %}
 {% block content %}
+{% set difficulty_emoji = {"easy": "🟢", "medium": "🟡", "hard": "🔴"} %}
 <header>
   <div class="label">ROLE · New session</div>
   <h1>Pick a training scenario</h1>
@@ -8,19 +9,25 @@
 </header>
 
 {% if latest_session_id %}
-<p><a class="button" href="/history/{{ latest_session_id }}">View last conversation</a></p>
+<p><a class="button" href="/history/{{ latest_session_id }}">↩ View last conversation</a></p>
 {% endif %}
 
+<div class="scenario-grid">
 {% for s in scenarios %}
 <div class="scenario-card">
-  <h3>{{ s.title }} <span class="muted">[{{ s.difficulty }}]</span></h3>
+  <div class="icon">{{ s.icon }}</div>
+  <h3>
+    {{ s.title }}
+    <span class="pill {{ s.difficulty }}">{{ difficulty_emoji.get(s.difficulty, "") }} {{ s.difficulty }}</span>
+  </h3>
   <p>{{ s.situation }}</p>
-  <p class="muted">Practising: {{ s.goal }}</p>
-  <p class="muted">Persona: {{ s.persona_name }}</p>
+  <p class="muted meta">🎯 {{ s.goal }}</p>
+  <p class="muted meta">🎭 {{ s.persona_name }}</p>
   <form method="post" action="/session">
     <input type="hidden" name="scenario_id" value="{{ s.id }}" />
-    <button type="submit">Start</button>
+    <button type="submit">🚀 Start</button>
   </form>
 </div>
 {% endfor %}
+</div>
 {% endblock %}
