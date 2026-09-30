@@ -222,7 +222,7 @@ def run_drift_harness(scenario_id: str = "order-change", difficulty: str = "easy
     fixture = FIXTURES[scenario_id]
     controller = Controller(difficulty)
     logger = SessionLogger()
-    persona = PersonaAgent(scenario.policy_path.read_text())
+    persona = PersonaAgent(scenario.policy_path.read_text(encoding="utf-8"))
     persona.set_facts(fixture.facts.render_pinned_block())
 
     drift_log: list[dict] = []

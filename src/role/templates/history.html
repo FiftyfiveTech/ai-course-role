@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}History{% endblock %}
+{% block content %}
+<header>
+  <div class="label">ROLE · History</div>
+  <h1>Past sessions</h1>
+</header>
+<ul class="history-list">
+  {% for s in sessions %}
+  <li>
+    <span>{{ s.session_id }}{% if s.in_progress %} <span class="muted">(in progress)</span>{% endif %}</span>
+    {% if s.scored %}<a class="button" href="/history/{{ s.session_id }}">View</a>{% endif %}
+  </li>
+  {% endfor %}
+</ul>
+{% if not sessions %}<p class="muted">No sessions yet.</p>{% endif %}
+{% endblock %}

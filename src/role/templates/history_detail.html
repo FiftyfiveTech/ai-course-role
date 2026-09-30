@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block title %}Session {{ session_id }}{% endblock %}
+{% block content %}
+{{ report_html | safe }}
+<p><a class="button" href="/history">Back to history</a></p>
+{% endblock %}

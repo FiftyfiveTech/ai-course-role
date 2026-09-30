@@ -1,0 +1,9 @@
+id: wrong-item-shipped
+title: "Wrong item shipped"
+difficulty: easy
+goal: "Confirm exactly what was received versus what was ordered, apologize for the error without over-promising, and arrange a correction with clear next steps"
+situation: "The customer ordered running shoes in size 10 but received size 8 in the box instead."
+persona:
+  name: Morgan
+  policy: persona_wrong_item_shipped_v1.md
+  opening: "You just connected. Explain that you ordered running shoes in size 10 but received size 8, and you want the correct item sent."

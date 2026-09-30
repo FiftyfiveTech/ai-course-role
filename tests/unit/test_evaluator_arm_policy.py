@@ -3,6 +3,7 @@
 No live API calls — instructor.from_groq/from_openai are mocked at the module
 boundary so nothing here touches the network or the Groq daily quota.
 """
+import logging
 from unittest.mock import MagicMock, patch
 
 import pytest
@@ -110,22 +111,22 @@ def test_evaluate_logs_evaluator_turn_with_cost_fields(tmp_path, monkeypatch):
 # evaluate(): Groq 429 -> Ollama fallback
 # ---------------------------------------------------------------------------
 
-def test_evaluate_falls_back_to_ollama_on_429(tmp_path, monkeypatch, capsys):
+def test_evaluate_falls_back_to_ollama_on_429(tmp_path, monkeypatch, caplog):
     session_id = _seed_session(tmp_path, monkeypatch)
     agent = _make_agent()
     agent._client.chat.completions.create_with_completion.side_effect = _rate_limit_error()
 
-    with patch("role.evaluator.instructor.from_openai") as mock_from_openai:
-        mock_from_openai.return_value.chat.completions.create_with_completion.return_value = (
-            _rubric_scores_result(session_id),
-            None,
-        )
-        scorecard = agent.evaluate(session_id)
+    with caplog.at_level(logging.WARNING, logger="role.evaluator"):
+        with patch("role.evaluator.instructor.from_openai") as mock_from_openai:
+            mock_from_openai.return_value.chat.completions.create_with_completion.return_value = (
+                _rubric_scores_result(session_id),
+                None,
+            )
+            scorecard = agent.evaluate(session_id)
 
     assert scorecard.session_id == session_id
-    captured = capsys.readouterr()
-    assert "arm-policy" in captured.out
-    assert "Ollama" in captured.out
+    assert "arm-policy" in caplog.text
+    assert "Ollama" in caplog.text
 
 
 def test_evaluate_ollama_fallback_logs_ollama_model(tmp_path, monkeypatch):

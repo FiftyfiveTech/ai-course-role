@@ -1,0 +1,9 @@
+id: repeated-billing-error
+title: "Repeated billing error"
+difficulty: hard
+goal: "Recognize an already-escalated customer, avoid repeating an apology that has already failed twice, and either resolve definitively or escalate with a concrete commitment"
+situation: "The customer has been billed the wrong amount for the third consecutive month, despite two prior calls where they were told it was fixed."
+persona:
+  name: Rowan
+  policy: persona_repeated_billing_error_v1.md
+  opening: "You just connected, already frustrated. State that this is the third month in a row you've been billed the wrong amount, despite being told twice before that it was fixed."

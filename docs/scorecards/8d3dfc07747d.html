@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ROLE Scorecard — 8d3dfc07747d</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --border: #2a2d3a;
+      --accent: #5b8def;
+      --warn: #e8a838;
+      --ok: #4caf82;
+      --bad: #e8646b;
+      --text: #d4d8e8;
+      --muted: #7a7f99;
+      --code-bg: #12141e;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.7;
+      padding: 2rem 1rem 4rem;
+    }
+    .page { max-width: 780px; margin: 0 auto; }
+    header { margin-bottom: 2.5rem; }
+    header .label {
+      font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); font-weight: 600; margin-bottom: 0.5rem;
+    }
+    header h1 { font-size: 1.8rem; font-weight: 700; line-height: 1.2; }
+    header p { color: var(--muted); margin-top: 0.5rem; font-size: 0.95rem; }
+    h2 {
+      font-size: 1.2rem; font-weight: 600; margin: 2.5rem 0 0.75rem;
+      padding-bottom: 0.4rem; border-bottom: 1px solid var(--border);
+    }
+    .item {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; padding: 1.1rem 1.3rem; margin: 1rem 0;
+    }
+    .item-head {
+      display: flex; justify-content: space-between; align-items: baseline;
+      margin-bottom: 0.6rem;
+    }
+    .item-name { font-weight: 700; }
+    .score { font-weight: 700; font-size: 0.9rem; }
+    .score.s2 { color: var(--ok); }
+    .score.s1 { color: var(--warn); }
+    .score.s0 { color: var(--bad); }
+    .evidence {
+      background: var(--code-bg); border-left: 3px solid var(--accent);
+      border-radius: 4px; padding: 0.6rem 0.9rem; margin-top: 0.5rem;
+      font-size: 0.88rem; color: var(--muted);
+    }
+    .evidence .turn-id {
+      font-family: "JetBrains Mono", "Fira Code", monospace;
+      color: var(--accent); font-size: 0.78rem;
+    }
+    .evidence .turn-text { color: var(--text); margin-top: 0.15rem; }
+    .plan-item {
+      background: var(--surface); border-left: 3px solid var(--ok);
+      border-radius: 6px; padding: 0.9rem 1.2rem; margin: 1rem 0;
+    }
+    .plan-item .rubric-item {
+      font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;
+      font-weight: 700; color: var(--ok); margin-bottom: 0.3rem;
+    }
+    footer {
+      margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--border);
+      font-size: 0.8rem; color: var(--muted);
+    }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div class="label">ROLE · Scorecard</div>
+    <h1>Session 8d3dfc07747d</h1>
+    <p>8 / 12 — rubric version evals/RUBRIC.md</p>
+  </header>
+
+  <h2>Rubric scores</h2>
+  <div class="item"><div class="item-head"><span class="item-name">question_coverage</span><span class="score s1">1/2</span></div><div class="evidence"><div class="turn-id">8d3dfc07747d:4</div><div class="turn-text">trainee: Can you tell me a bit more about what happened, and your order details?</div></div></div><div class="item"><div class="item-head"><span class="item-name">listening_ratio</span><span class="score s0">0/2</span></div><div class="evidence"><div class="turn-id">8d3dfc07747d:2</div><div class="turn-text">trainee: Hi, thanks for calling — I understand you have a question, let me help with that.</div></div><div class="evidence"><div class="turn-id">8d3dfc07747d:6</div><div class="turn-text">trainee: I understand — let me see what options we have here.</div></div></div><div class="item"><div class="item-head"><span class="item-name">factual_accuracy</span><span class="score s2">2/2</span></div><div class="evidence"><div class="turn-id">8d3dfc07747d:8</div><div class="turn-text">trainee: I can go ahead and make that change for you, is that okay?</div></div><div class="evidence"><div class="turn-id">8d3dfc07747d:10</div><div class="turn-text">trainee: You&#x27;re all set — you&#x27;ll get a confirmation shortly. Anything else I can help with?</div></div></div><div class="item"><div class="item-head"><span class="item-name">policy_adherence</span><span class="score s2">2/2</span></div><div class="evidence"><div class="turn-id">8d3dfc07747d:8</div><div class="turn-text">trainee: I can go ahead and make that change for you, is that okay?</div></div><div class="evidence"><div class="turn-id">8d3dfc07747d:9</div><div class="turn-text">persona: Yes, go ahead and change the order to the SoundCore 3. Let me know if there’s any price difference I need to cover or a refund due. Confirm the updated order number and expected shipping date once the change is applied.</div></div></div><div class="item"><div class="item-head"><span class="item-name">objection_handling</span><span class="score s2">2/2</span></div><div class="evidence"><div class="turn-id">8d3dfc07747d:8</div><div class="turn-text">trainee: I can go ahead and make that change for you, is that okay?</div></div></div><div class="item"><div class="item-head"><span class="item-name">clarity</span><span class="score s1">1/2</span></div><div class="evidence"><div class="turn-id">8d3dfc07747d:10</div><div class="turn-text">trainee: You&#x27;re all set — you&#x27;ll get a confirmation shortly. Anything else I can help with?</div></div></div>
+
+  <h2>Learning plan</h2>
+  <div class="plan-item"><div class="rubric-item">listening_ratio</div><div>Increase active listening by summarizing client statements before responding and asking clarifying questions to ensure you fully understand their needs.</div></div><div class="plan-item"><div class="rubric-item">question_coverage</div><div>Expand the range of questions asked to cover all key aspects of the client&#x27;s situation, ensuring you gather comprehensive information before proceeding.</div></div><div class="plan-item"><div class="rubric-item">clarity</div><div>Simplify explanations and use concise language to improve clarity, avoiding jargon and ensuring each point is clearly articulated.</div></div>
+
+  <footer>ROLE — Roleplay &amp; Skills Coach · every score above cites the real transcript turn it is grounded in</footer>
+</div>
+</body>
+</html>

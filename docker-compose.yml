@@ -1,0 +1,27 @@
+services:
+  tempo:
+    image: grafana/tempo:latest
+    command: ["-config.file=/etc/tempo.yaml"]
+    volumes:
+      - ./docker/tempo.yaml:/etc/tempo.yaml:ro
+      - tempo-data:/var/tempo
+    ports:
+      - "4318:4318" # OTLP/HTTP receiver — set OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318
+      - "3200:3200" # Tempo query API — used by Grafana's provisioned datasource
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    environment:
+      # Local, throwaway dev stack only — not exposed beyond this machine.
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+      - GF_AUTH_DISABLE_LOGIN_FORM=true
+    volumes:
+      - ./docker/grafana-datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml:ro
+    depends_on:
+      - tempo
+
+volumes:
+  tempo-data:

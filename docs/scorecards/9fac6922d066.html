@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ROLE Scorecard — 9fac6922d066</title>
+  <style>:root {
+  --bg: #0f1117;
+  --surface: #1a1d27;
+  --border: #2a2d3a;
+  --accent: #5b8def;
+  --warn: #e8a838;
+  --ok: #4caf82;
+  --bad: #e8646b;
+  --text: #d4d8e8;
+  --muted: #7a7f99;
+  --code-bg: #12141e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.7;
+  padding: 2rem 1rem 4rem;
+}
+.page { max-width: 780px; margin: 0 auto; }
+header { margin-bottom: 2.5rem; }
+header .label {
+  font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--accent); font-weight: 600; margin-bottom: 0.5rem;
+}
+header h1 { font-size: 1.8rem; font-weight: 700; line-height: 1.2; }
+header p { color: var(--muted); margin-top: 0.5rem; font-size: 0.95rem; }
+h2 {
+  font-size: 1.2rem; font-weight: 600; margin: 2.5rem 0 0.75rem;
+  padding-bottom: 0.4rem; border-bottom: 1px solid var(--border);
+}
+.item {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 8px; padding: 1.1rem 1.3rem; margin: 1rem 0;
+}
+.item-head {
+  display: flex; justify-content: space-between; align-items: baseline;
+  margin-bottom: 0.6rem;
+}
+.item-name { font-weight: 700; }
+.score { font-weight: 700; font-size: 0.9rem; }
+.score.s2 { color: var(--ok); }
+.score.s1 { color: var(--warn); }
+.score.s0 { color: var(--bad); }
+.evidence {
+  background: var(--code-bg); border-left: 3px solid var(--accent);
+  border-radius: 4px; padding: 0.6rem 0.9rem; margin-top: 0.5rem;
+  font-size: 0.88rem; color: var(--muted);
+}
+.evidence .turn-id {
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+  color: var(--accent); font-size: 0.78rem;
+}
+.evidence .turn-text { color: var(--text); margin-top: 0.15rem; }
+.plan-item {
+  background: var(--surface); border-left: 3px solid var(--ok);
+  border-radius: 6px; padding: 0.9rem 1.2rem; margin: 1rem 0;
+}
+.plan-item .rubric-item {
+  font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;
+  font-weight: 700; color: var(--ok); margin-bottom: 0.3rem;
+}
+footer {
+  margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--border);
+  font-size: 0.8rem; color: var(--muted);
+}
+nav.top {
+  max-width: 780px; margin: 0 auto 1.5rem; display: flex; gap: 1.5rem;
+  font-size: 0.9rem;
+}
+nav.top a {
+  color: var(--muted); text-decoration: none; padding-bottom: 0.3rem;
+}
+nav.top a:hover, nav.top a.active { color: var(--accent); }
+.scenario-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 8px; padding: 1.1rem 1.3rem; margin: 1rem 0;
+}
+.scenario-card h3 { font-size: 1.05rem; margin-bottom: 0.3rem; }
+.scenario-card p { color: var(--muted); font-size: 0.9rem; margin: 0.2rem 0; }
+.scenario-card button, .turn-form button, .history-list a.button, a.button {
+  background: var(--accent); color: #0f1117; border: none;
+  border-radius: 6px; padding: 0.55rem 1.1rem; font-weight: 600;
+  cursor: pointer; font-size: 0.9rem; text-decoration: none; display: inline-block;
+}
+.transcript { margin: 1.5rem 0; }
+.turn {
+  border-radius: 8px; padding: 0.8rem 1.1rem; margin: 0.6rem 0; max-width: 85%;
+}
+.turn.persona { background: var(--surface); border: 1px solid var(--border); }
+.turn.trainee { background: var(--code-bg); border: 1px solid var(--border); margin-left: auto; }
+.turn .speaker {
+  font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 0.3rem;
+}
+.turn-form { display: flex; gap: 0.6rem; margin-top: 1rem; }
+.turn-form input[type="text"] {
+  flex: 1; background: var(--code-bg); border: 1px solid var(--border);
+  border-radius: 6px; padding: 0.55rem 0.8rem; color: var(--text); font-size: 0.95rem;
+}
+.history-list { list-style: none; }
+.history-list li {
+  display: flex; justify-content: space-between; align-items: center;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 8px; padding: 0.9rem 1.2rem; margin: 0.6rem 0;
+}
+.history-list .muted { color: var(--muted); font-size: 0.85rem; }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div class="label">ROLE · Scorecard</div>
+    <h1>Session 9fac6922d066</h1>
+    <p>9 / 12 — rubric version evals/RUBRIC.md</p>
+  </header>
+
+  <h2>Rubric scores</h2>
+  <div class="item"><div class="item-head"><span class="item-name">question_coverage</span><span class="score s1">1/2</span></div><div class="evidence"><div class="turn-id">9fac6922d066:4</div><div class="turn-text">trainee: Can you tell me a bit more about what happened, and your order details?</div></div></div><div class="item"><div class="item-head"><span class="item-name">listening_ratio</span><span class="score s0">0/2</span></div><div class="evidence"><div class="turn-id">9fac6922d066:2</div><div class="turn-text">trainee: Hi, thanks for calling � I understand you have a question, let me help with that.</div></div></div><div class="item"><div class="item-head"><span class="item-name">factual_accuracy</span><span class="score s2">2/2</span></div><div class="evidence"><div class="turn-id">9fac6922d066:10</div><div class="turn-text">trainee: You&#x27;re all set � you&#x27;ll get a confirmation shortly. Anything else I can help with?</div></div></div><div class="item"><div class="item-head"><span class="item-name">policy_adherence</span><span class="score s2">2/2</span></div><div class="evidence"><div class="turn-id">9fac6922d066:8</div><div class="turn-text">trainee: I can go ahead and make that change for you, is that okay?</div></div></div><div class="item"><div class="item-head"><span class="item-name">objection_handling</span><span class="score s2">2/2</span></div><div class="evidence"><div class="turn-id">9fac6922d066:8</div><div class="turn-text">trainee: I can go ahead and make that change for you, is that okay?</div></div></div><div class="item"><div class="item-head"><span class="item-name">clarity</span><span class="score s2">2/2</span></div><div class="evidence"><div class="turn-id">9fac6922d066:10</div><div class="turn-text">trainee: You&#x27;re all set � you&#x27;ll get a confirmation shortly. Anything else I can help with?</div></div></div>
+
+  <h2>Learning plan</h2>
+  <div class="plan-item"><div class="rubric-item">listening_ratio</div><div>Focus on active listening by summarizing the client’s statements before responding, ensuring you capture their concerns and maintain a balanced dialogue.</div></div><div class="plan-item"><div class="rubric-item">question_coverage</div><div>Expand the range of questions to cover all key topics, using open-ended prompts to elicit detailed information and demonstrate comprehensive coverage.</div></div>
+
+  <footer>ROLE — Roleplay &amp; Skills Coach · every score above cites the real transcript turn it is grounded in</footer>
+</div>
+</body>
+</html>

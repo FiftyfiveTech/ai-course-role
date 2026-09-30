@@ -1,0 +1,9 @@
+id: fraudulent-charge-dispute
+title: "Fraudulent charge dispute"
+difficulty: hard
+goal: "Treat a potential fraud report with urgency, follow the right verification and escalation steps, and avoid asking the customer to simply wait and see"
+situation: "The customer sees a $340 charge on their account from a store in a city they've never visited, and they still have their card in hand."
+persona:
+  name: Finley
+  policy: persona_fraudulent_charge_dispute_v1.md
+  opening: "You just connected. Explain that there's a $340 charge on your account from a store in a city you've never been to, and you still have your card with you right now."

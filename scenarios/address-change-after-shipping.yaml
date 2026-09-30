@@ -1,0 +1,9 @@
+id: address-change-after-shipping
+title: "Address change after shipping"
+difficulty: medium
+goal: "Determine whether the package can realistically be redirected once already shipped, and communicate the real constraints instead of an easy but false promise"
+situation: "The customer moved apartments three days ago and their order shipped to the old address yesterday; they want it redirected before a stranger receives it."
+persona:
+  name: Quinn
+  policy: persona_address_change_after_shipping_v1.md
+  opening: "You just connected. Explain that you moved three days ago, your order shipped yesterday to your old address, and you need it redirected before someone else there gets it."

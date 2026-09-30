@@ -21,6 +21,8 @@ SESSIONS_DIR = Path(__file__).parent.parent.parent / "sessions"
 _RATES: dict[str, tuple[float, float]] = {
     "openai/gpt-oss-120b": (0.0, 0.0),  # (prompt, completion)
     "Qwen/Qwen3.8-27B": (0.0, 0.0),
+    "openai/gpt-oss-safeguard-20b": (0.0, 0.0),
+    "openai/gpt-oss-20b": (0.0, 0.0),
 }
 _DEFAULT_RATE = (0.0, 0.0)
 
@@ -63,7 +65,7 @@ class SessionLogger:
         """
         if not self._path.exists():
             return 1
-        lines = [ln.strip() for ln in self._path.read_text().splitlines() if ln.strip()]
+        lines = [ln.strip() for ln in self._path.read_text(encoding="utf-8").splitlines() if ln.strip()]
         if not lines:
             raise ValueError(
                 f"Session file {self._path} exists but contains no turn records. "

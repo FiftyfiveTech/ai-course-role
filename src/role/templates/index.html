@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}ROLE — Pick a scenario{% endblock %}
+{% block content %}
+<header>
+  <div class="label">ROLE · New session</div>
+  <h1>Pick a training scenario</h1>
+  <p>Practise a support conversation against a simulated customer persona.</p>
+</header>
+
+{% if latest_session_id %}
+<p><a class="button" href="/history/{{ latest_session_id }}">View last conversation</a></p>
+{% endif %}
+
+{% for s in scenarios %}
+<div class="scenario-card">
+  <h3>{{ s.title }} <span class="muted">[{{ s.difficulty }}]</span></h3>
+  <p>{{ s.situation }}</p>
+  <p class="muted">Practising: {{ s.goal }}</p>
+  <p class="muted">Persona: {{ s.persona_name }}</p>
+  <form method="post" action="/session">
+    <input type="hidden" name="scenario_id" value="{{ s.id }}" />
+    <button type="submit">Start</button>
+  </form>
+</div>
+{% endfor %}
+{% endblock %}
